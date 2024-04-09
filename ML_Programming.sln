@@ -9,17 +9,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.Variable", "01.Variable\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.Variable_Task", "01.Variable_Task\01.Variable_Task.csproj", "{2CFA2D1D-45A9-446F-BCEA-498241D89B37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "00.ComputerScience", "00.ComputerScience\00.ComputerScience.csproj", "{2FF871C4-E093-45FC-AF5C-61259021E355}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "00.ComputerScience", "00.ComputerScience\00.ComputerScience.csproj", "{2FF871C4-E093-45FC-AF5C-61259021E355}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.Operator", "02.Operator\02.Operator.csproj", "{360DB7CF-79E0-4EF9-8205-BD6D7684FAC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.Operator", "02.Operator\02.Operator.csproj", "{360DB7CF-79E0-4EF9-8205-BD6D7684FAC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.Operator_Task", "02.Operator_Task\02.Operator_Task.csproj", "{4EE7ACEB-7E0C-4AF9-A3F2-B2C1E8B6691A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.Operator_Task", "02.Operator_Task\02.Operator_Task.csproj", "{4EE7ACEB-7E0C-4AF9-A3F2-B2C1E8B6691A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Conditional", "03.Conditional\03.Conditional.csproj", "{3776ABA6-7AA6-4E32-AA54-9008A953B3AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.Conditional", "03.Conditional\03.Conditional.csproj", "{3776ABA6-7AA6-4E32-AA54-9008A953B3AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Loop", "04.Loop\04.Loop.csproj", "{5E3CF15F-32BD-4D89-B10C-0FE0456B2798}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.Loop", "04.Loop\04.Loop.csproj", "{5E3CF15F-32BD-4D89-B10C-0FE0456B2798}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Loop_Task", "04.Loop_Task\04.Loop_Task.csproj", "{FB8BE242-E08C-4B34-9489-EECF09165442}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.Loop_Task", "04.Loop_Task\04.Loop_Task.csproj", "{FB8BE242-E08C-4B34-9489-EECF09165442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.Function", "05.Function\05.Function.csproj", "{ECC83E5D-A4E1-4CA2-AA34-3E3F7E92C986}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{FB8BE242-E08C-4B34-9489-EECF09165442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB8BE242-E08C-4B34-9489-EECF09165442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB8BE242-E08C-4B34-9489-EECF09165442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECC83E5D-A4E1-4CA2-AA34-3E3F7E92C986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECC83E5D-A4E1-4CA2-AA34-3E3F7E92C986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECC83E5D-A4E1-4CA2-AA34-3E3F7E92C986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECC83E5D-A4E1-4CA2-AA34-3E3F7E92C986}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
