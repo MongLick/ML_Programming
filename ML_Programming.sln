@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07.Class", "07.Class\07.Cla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "08.Memory", "08.Memory\08.Memory.csproj", "{C055C246-D5F2-40F8-B749-6D155E149F39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08.Memory,Class_Task", "08.Memory,Class_Task\08.Memory,Class_Task.csproj", "{DA295193-F4A1-4AB3-9C5B-C73C0E188E8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08.Memory_Class_Task", "08.Memory,Class_Task\08.Memory_Class_Task.csproj", "{DA295193-F4A1-4AB3-9C5B-C73C0E188E8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
