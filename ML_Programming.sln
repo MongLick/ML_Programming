@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "08.Memory_Class_Task", "08.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "09.OOP", "09.OOP\09.OOP.csproj", "{CEEE321F-8F53-45A1-90EA-EAFF74F41A72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09.OOP_Task", "09.OOP_Task\09.OOP_Task.csproj", "{60D3CFFE-5DE3-4E4A-A278-45C77FA36D3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "09.OOP_Task", "09.OOP_Task\09.OOP_Task.csproj", "{60D3CFFE-5DE3-4E4A-A278-45C77FA36D3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10.Interface", "10.Interface\10.Interface.csproj", "{C82A2360-80CE-4CD3-A11D-6141F7B780DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{60D3CFFE-5DE3-4E4A-A278-45C77FA36D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60D3CFFE-5DE3-4E4A-A278-45C77FA36D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60D3CFFE-5DE3-4E4A-A278-45C77FA36D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C82A2360-80CE-4CD3-A11D-6141F7B780DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C82A2360-80CE-4CD3-A11D-6141F7B780DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C82A2360-80CE-4CD3-A11D-6141F7B780DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C82A2360-80CE-4CD3-A11D-6141F7B780DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
