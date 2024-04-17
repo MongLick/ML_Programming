@@ -15,6 +15,8 @@ namespace _14._Delegate
          * 함수의 호출(Call)이 아닌 역으로 호출받을 때 반응을 참조하여 역호출(Callback)
          *******************************************************************************/
 
+		// UI에서 제일 많이 사용하게 될 것
+
 		void Main()
 		{
 			File file = new File();
@@ -54,5 +56,7 @@ namespace _14._Delegate
 				Console.WriteLine("불러오기 합니다.");
 			}
 		}
+
+
 	}
 }
