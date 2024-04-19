@@ -43,9 +43,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "11.Array", "11.Array\11.Arr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "10.Interface_Task", "10.Interface_Task\10.Interface_Task.csproj", "{4950893E-C020-419E-9CC2-094ABBABBA90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12.Generic", "12.Generic\12.Generic.csproj", "{FFD8D5CC-B7FB-4A4E-ADCD-C34B0F8181EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "12.Generic", "12.Generic\12.Generic.csproj", "{FFD8D5CC-B7FB-4A4E-ADCD-C34B0F8181EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "14.Delegate", "14.Delegate\14.Delegate.csproj", "{710181A4-A939-4F43-8311-5B38A9B49854}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "14.Delegate", "14.Delegate\14.Delegate.csproj", "{710181A4-A939-4F43-8311-5B38A9B49854}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "14.Delegate_Task", "14.Delegate_Task\14.Delegate_Task.csproj", "{72681D86-6A2D-4538-807E-48D0D32165AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +143,10 @@ Global
 		{710181A4-A939-4F43-8311-5B38A9B49854}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{710181A4-A939-4F43-8311-5B38A9B49854}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{710181A4-A939-4F43-8311-5B38A9B49854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72681D86-6A2D-4538-807E-48D0D32165AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72681D86-6A2D-4538-807E-48D0D32165AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72681D86-6A2D-4538-807E-48D0D32165AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72681D86-6A2D-4538-807E-48D0D32165AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
