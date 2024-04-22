@@ -106,5 +106,7 @@
 
 			player.TakeDamage(10);
 		}
+
+		// c# 단위평가한 날
 	}
 }
