@@ -244,6 +244,8 @@
 			Console.WriteLine(FindModeNumber(d));
 			Console.WriteLine(FindModeNumber(e));
 			Console.WriteLine(FindModeNumber(f));
+
+			// 처음부터 끝까지 정독
 		}
 	}
 }
