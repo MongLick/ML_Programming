@@ -229,7 +229,528 @@ namespace _99.LastCheck
 
 			// 외울 필요는 없고 필요하다면 찾아서 사용하면 된다.
 
-			// 노트북 깃 체크
+			// 조건문 조건에 따라 실행이 달라지게 할 떄 사용하는 문장이다. 
+			// if 조건문 조건식의 true, false에 따라 실행할 블록을 결정하는 조건문이다.
+
+			if (true)
+			{
+				Console.WriteLine("실행이 되는 블록");
+			}
+			else
+			{
+				Console.WriteLine("실행이 되지 않는 볼록");
+			}
+
+			if (false)
+			{
+				Console.WriteLine("실행이 되지 않는 블록");
+			}
+			else
+			{
+				Console.WriteLine("실행이 되는 블록");
+			}
+
+			if (true)
+			{
+				Console.WriteLine("실행이 되는 블록");
+			}
+			// else 구문은 필수가 아니다. 필요가 없다면 사용하지 않아도 상관없음.
+
+			string input = "바위";
+			if (input == "가위")
+			{
+				Console.WriteLine("가위를 입력");
+			}
+			else if (input == "바위")
+			{
+				Console.WriteLine("바위를 입력");
+			}
+			else if (input == "보")
+			{
+				Console.WriteLine("보를 입력");
+			}
+			else
+			{
+				Console.WriteLine("잘못된 값을 입력");
+			}
+			//switch 조건문
+			string cmd = "B";
+			switch (cmd)
+			{
+				case "A":
+					Console.WriteLine("A가 일치하는 경우");
+					break;
+				case "B":
+					Console.WriteLine("B가 일치하는 경우");
+					break;
+				case "C":
+					Console.WriteLine("C가 일치하는 경우");
+					break;
+			}
+
+			// 조건값일 일치하는 case가 없을 경우 default가 실행지점이 된다.
+			int value3 = 7;
+			switch (value3)
+			{
+				case 1:
+					Console.WriteLine("값은 1");
+					break;
+				case 2:
+					Console.WriteLine("값은 2");
+					break;
+				default:
+					Console.WriteLine("값은 그 외");
+					break;
+			}
+
+			// 조건값에 따라 동일한 실행이 필요한 경우 묶어서 사용 가능하다.
+			char key2 = 'w';
+			switch (key2)
+			{
+				case 'w':
+				case 'W':
+				case 'ㅈ':
+					Console.WriteLine("위쪽으로 이동");
+					break;
+				case 'a':
+				case 'A':
+				case 'ㅁ':
+					Console.WriteLine("왼쪽으로 이동");
+					break;
+				case 's':
+				case 'S':
+				case 'ㄴ':
+					Console.WriteLine("아래쪽으로 이동");
+					break;
+				case 'd':
+				case 'D':
+				case 'ㅇ':
+					Console.WriteLine("오른쪽으로 이동");
+					break;
+				default:
+					Console.WriteLine("이동하지 않음");
+					break;
+			}
+
+			// 삼항 연산자 조건 ? true인 경우 값 : false인 경우 값을 넣어준다.'
+			int big = 20 > 10 ? 20 : 10;
+			int small = 20 < 10 ? 20 : 10;
+			// 위에꺼는 true이기 때문에 20이 들어가고 아래는 false이기 떄문에 10이 들어간다.
+
+			int left = 11;
+			int right = 22;
+			int bigger = left > right ? left : right;
+			// 조건이 false로 나오기 때문에 right 값으로 나오게 된다.
+			Console.WriteLine(bigger);
+
+			// 반복문 블록을 반복적으로 실행하는 문자이다.
+			// while 반복문은 조건식의 true false에 따라 블록을 반복하는 반복문이다.
+			int coin = 400;
+			while (coin > 0)
+			{
+				Console.WriteLine("100원 동전을 꺼냅니다");
+				coin -= 100;
+			}
+
+			// do while 반복문 블록을 한 번 실행 후 조건식의 true false에 따라 블록을 반복하는 반복문이다.
+
+			int input2;
+			do
+			{
+				Console.Write("1에서 9 사이의 수를 입력해주세요 : ");
+				string text = Console.ReadLine();
+				int.TryParse(text, out input2);
+				// 적어도 한 번 실행을 하고 체크를 하게 된다. 둘의 차이점은 위에서 체크를 진행하는지 아래에서 체크하는지가 차이점이다.
+			} while (input2 < 1 || 9 < input2);
+
+			// for 반복문 초기화 , 조건식, 증감연산으로 구성된 반복문을 말한다.
+			for (int i = 0; i < 5; i++)
+			{
+				Console.WriteLine(i);
+			}
+			// 몇 번 반복을 하겠다에 사용을 한다.
+
+			// foreach 반복문 반복 가능한 데이터집합의 처음부터 끝가지 반복한다.
+
+			int[] intArray = { 1, 3, 7, 9, 8, 6, 4, 2, 0 };
+			foreach (int i in intArray)
+			{
+				Console.WriteLine(i);
+			}
+			// 하나씩 전부 꺼내어 준다.
+
+			// 제어문 프로그램의 순차적인 실행 중 다른 문으로 제어를 전송
+			// break 제어문 가장 가까운 반복문을 종료한다.
+
+			int num = 35;
+			for (int i = 2; i < num; i++)
+			{
+				if (num % 1 == 0)
+				{
+					Console.WriteLine(i);
+					break;
+				}
+			}
+
+			// 찾았으니 그만 찾아 라는 방법이다.
+
+			// continue 제어문 가장 가까운 반복문의 새 반복을 시작한다.
+			for (int i = 0; i < 10; i++)
+			{
+				if (i % 2 == 0)
+				{
+					continue;
+				}
+				if (i % 3 == 0)
+				{
+					continue;
+				}
+				Console.WriteLine(i);
+			}
+			// break는 찾았으니 해당 반복을 종료하고 continue는 현재 i는 무시하고 계속 반복해 라는 것이다.
+
+			// 함수 미리 정해진 동작을 수행하는 코드 묶음이다 어떤 처리를 함수로 만들어 두면 다시 반복적으로 사용이 가능하다.
+			// 함수 구성 일련의 코드를 하나의 이름 아래에 묶음
+			// 반환형(출력), 함수이름(매개변수목록(입력)){함수내용} 으로 이루어져있다. 
+
+			// 함수를 사용하지 않는 경우는 
+			int result = 1 + 2;
+			// 와 같이 사용을 하지만. 
+			// 함수를 사용하는 경우는
+			int value4 = Plus(1, 3);
+
+			// 반환형 함수의 결과 데이터의 자료형
+			// 함수가 끝나기 전까지 반드시 return으로 반환형에 맞는 데이터를 출력해야한다.
+			// 함수 진행 중 return을 만나는 경우 그 즉시 결과 데이터를 반환하고 함수가 종료된다.
+			// 함수의 결과가 없는 경우 반환형은 void이며 return을 생략할 수 있다.
+
+			int ret = Return(); // int 반환형이니 int를 담을 수 있는 변수에 넣어 놓고 출력이 가능하다.
+			PrintProfile("", "010-1234-5678");
+			PrintProfile("홍길동", "010-1111-2222"); // void는 반환해주는 것이 없기 때문에 변수에 담지 않고 실행 자체에 의미를 둔다.
+
+			// 매개변수 함수에 추가할 데이터의 자료형과 변수명 같은 함수에서도 매개변수 입력이 다름에 따라 다른 처리가 가능하다.
+			// 매개변수는 함수 옆에 ()안에 있는 걸 매개변수라고 부른다.
+			// void 일 때 매개변수 사용이 가능하다.
+			// void는 return되는 값이 없는 것 뿐이다. return 사용 자체는 가능하다.
+			// void 일 때 매개변수를 사용해서 어떤 부분에 어떤 값을 넣을지는 사용이 가능.
+			// 반환형은 내가 return해서 출력을 원하는 경우에 사용을 한다.
+
+			// 변수는 명사 함수는 동사로 써주는 것이 좋다. 함수 == 메소드이다.
+			// 함수는 클래스 안에 잇어야한다.
+
+			// 클래스 밖에 있는 것은 전역함수
+			// ()안에 있는 것이 매개변수
+			// 클래스 안에 있는 것이 멤버변수(인스턴스변수 라고도 부르는 것 같음)
+			// 함수 안에 있는 것이 지역변수이다.
+
+			// 매개변수 명, 변수 명은 다른 블록에서 똑같은 이름으로 사용이 가능하다.
+			// 함수가 다른 곳이라면 이름을 똑같이 해도 이름만 같을 뿐 전혀 다른 내용이다.
+
+			int damage2 = TripleShot();
+			Console.WriteLine(damage2);
+			damage2 = TripleShot2();
+			Console.WriteLine(damage2);
+
+			// 이렇게 매개변수에 데미지를 넣어서 트리플에서 데미지를 얼마나 줄지 적용 시켜줄 수 있고
+			// 어택 자체에서 데미지를 10으로 규정하면 트리플에서 바로 얼마만큼의 데미지를 줄지 설정할 수도 있다.
+
+			// 함수 오버로딩
+			// 같은 이름의 함수를 매개변수를 달리하여 다른 함수로 재정의하는 기술이다.
+			// 같은 이름의 함수를 호출하여도 매개변수의 자료형에 따라 함수를 달리 호출할 수도 있다.
+
+			int result2 = Multi(5, 3);
+			float result3 = Multi(5.1f, 5.2f); // f를 안 붙이면 double이기 때문에 f를 붙여주기
+			double result4 = Multi(2.2, 3.3f); // right가 float였으니 f를 붙여준것
+			Console.WriteLine(result2);
+			Console.WriteLine(result3);
+			Console.WriteLine(result4);
+
+			// 열거형 기본 정수 숫자의 형식의 명명된 상수 집합에 의해 정의되는 값 형식이다.
+			// 열거형 멤버의 이름으로 관리되어 코드의 가독성적인 측면에 도움이 된다.
+
+			// 열거형 사용은 eunm 열거형이름 {멤버이름, 멤버이름} 으로 사용한다.
+			Direction dir = Direction.Up;
+			switch (dir)
+			{
+				case Direction.Up:
+					Console.WriteLine("위쪽으로 이동");
+					break;
+				case Direction.Down:
+					Console.WriteLine("아래쪽으로 이동");
+					break;
+				case Direction.Left:
+					Console.WriteLine("왼쪽으로 이동");
+					break;
+				case Direction.Right:
+					Console.WriteLine("오른쪽으로 이동");
+					break;
+			}
+
+			Season season = Season.Autumn;
+			Console.WriteLine(season);
+			Console.WriteLine((int)season);
+
+			// 구조체 데이터와 관련 기능을 캡슐화할 수 있는 값형식이다.
+			// 데이터를 저장하기 보관하기 위한 단위 용도로 사용한다.
+			// 구조체는 struct 구조체 이름 {구조체 내용}으로 이루어져있다.
+			// 구조체 내용으로는 변수와 함수가 포함이 가능하다.
+
+			StudentInfo info;
+			info.name = "kim";
+			info.math = 10;
+			info.english = 20;
+			info.science = 100;
+
+			float average = info.Average(); // 구조체내 함수에 접근하기 위해 구조체에 .을 붙여서 사용한다.
+			Console.WriteLine(average);
+
+			StudentInfo kim;
+			kim.name = "김";
+			kim.math = 100;
+			kim.english = 50;
+			kim.science = 70;
+			average = kim.Average();
+			Console.WriteLine(average);
+
+			// 구조체 초기화
+			// 반환형이 없는 구조체이름의 함수를 초기화라 하며 구조체 변수들의 초기화를 진행하는 역할로 사용
+			// 매개변수가 있는 초기화를 정의하여 구조체 변수의 값을 설정하기 위한 용도로 사용한다.
+			// 구조체의 초기화는 new 키워드를 통해서 사용한다.
+
+			Point point1;
+			point1.x = 1;
+			Console.WriteLine(point1.x);
+			// y는 초기화 하지 않았기 때문에 y를 사용할 수는 없다.
+
+			Point point = new Point();
+			Console.WriteLine($"{point.x}, {point.y}");
+
+			// 보통 이렇게 많이 사용을 한다. 이러면 0, 0으로 기본 초기화를 사용하는거고 new point(10, 10)
+			// 이렇게 10, 10을 넣으면 x,y 에 각각 10씩 들어간다.
+			// 혹은 아래와 같이 초기화 및 대입이 가능하다.
+			Point point2 = new Point() { x = 3, y = 5 };
+
+			// 구조체는 깊은 복사로 이루어진다.
+			MyStruct s = new MyStruct();
+			s.value1 = 1;
+			s.value2 = 2;
+
+			MyStruct t = s;
+			t.value1 = 3;
+
+			Console.WriteLine(s.value1);
+			Console.WriteLine(s.value2);
+			Console.WriteLine(t.value1);
+			Console.WriteLine(t.value2);
+
+			// t를 바꾸었기 때문에 깊은 복사가 이루어져서 실제 값이 바뀌게 된다.
+
+			// 클래스 구성 Class 클래스 이름 {클래스 내용}으로 사용하면 된다.
+			// 클래스 내용으로는 구조체와 똑같이 함수와 변수가 포함이 가능하다.
+
+			Student kim1 = new Student();
+			kim1.name = "kim";
+			kim1.math = 10;
+			kim1.english = 20;
+			kim1.science = 100;
+			float average1 = kim1.GetAverage();
+			Console.WriteLine(average1);
+
+			// 클래스 생성자 반환형이 없는 클래스 이름의 함수를 생성자라하며 클래스의 인스턴스를 만들 때 호출 되는 역할로 사용
+			// 인스턴스의 생성자는 new 키워드를 통해서 사용이 가능하다.
+
+			Car truck = new Car("트럭", "파란색");
+			Console.WriteLine($"{truck.name}, {truck.color}");
+
+			// 클래스 지역변수는 인스턴스 없이 사용이 불가능하다. 
+			// 기본생성자는 다른 생성자를 포함하지 않은 경우에만 자동생성이 가능하다.
+
+			MyClass s1 = new MyClass();
+			s1.value1 = 1;
+			s1.value2 = 2;
+
+			MyClass t1 = s1;
+			t1.value1 = 3;
+
+			Console.WriteLine(s1.value1);
+			Console.WriteLine(s1.value2);
+			Console.WriteLine(t1.value1);
+			Console.WriteLine(t1.value2);
+
+			// 같은 인스턴스를 참조하기 때문에 복사본을 변경하는 경우 원본도 변경이 된다.
+		}
+
+
+
+
+
+
+
+		static int Plus(int left, int right)
+		{
+			int result = left + right;
+			return result;
+		}
+
+		static int Return()
+		{
+			Console.WriteLine("도달하는 코드");
+			return 10;
+			Console.WriteLine("도달하지 못하는 코드이다.");
+		}
+
+		static void PrintProfile(string name, string phone)
+		{
+			if (name == "")
+			{
+				Console.WriteLine("이름을 입력해주세요");
+				return; // 반환형의 return은 함수 종료의 역할을 한다.
+			}
+			Console.WriteLine(name, phone); // 이러면 name만 나온다.
+			Console.WriteLine($"{name}, {phone}"); // 둘다 출력시키고 싶으면 이렇게 하면 된다.
+												   // void 반환형에서 return을 생략할 수 있다.
+		}
+
+		static int Minus(int left, int right)
+		{
+			return left - right;
+		}
+
+		// 매개변수를 사용했을 때
+		static int TripleShot()
+		{
+			int damage = 0;
+			damage += Attack(10);
+			damage += Attack(10);
+			damage += Attack(10);
+			return damage;
+		}
+
+		static int Attack(int damage)
+		{
+			return damage;
+		}
+
+		// 매개변수를 사용 안 했을 때
+		static int TripleShot2()
+		{
+			int damage = 0;
+			damage += Attack2();
+			damage += Attack2();
+			damage += Attack2();
+
+			return damage;
+		}
+
+		static int Attack2()
+		{
+			return 100;
+		}
+
+		static int Multi(int left, int right) { return left * right; }
+		static float Multi(float left, float right) { return left * right; }
+		static double Multi(double left, float right) { return left * right; } // 이런식으로 매개변수가 반환형이 달라도 할 수 있다.
+	}
+
+	enum Direction
+	{
+		Up, Down, Left, Right
+	}
+
+	enum Season
+	{
+		Spring, // 0
+		Summer, // 1
+		Autumn = 20, // 20
+		Winter // 21
+	}
+
+	struct StudentInfo
+	{
+		public string name;
+		public int math;
+		public int english;
+		public int science;
+
+		public float Average()
+		{
+			return (math + english + science) / 3f;
 		}
 	}
+
+	struct Point
+	{
+		public int x;
+		public int y;
+
+		public Point(int x, int y)
+		{
+			// 초기화에서 모든 구조체 변수를 초기화라지 않으면 에러가 발생한다.
+			this.x = x;
+			this.y = y;
+			// this는 자기 자신을 가르킨다.
+		}
+	}
+
+	enum Jop
+	{
+		Archor,
+		Mage,
+		Knight
+	}
+
+	struct PlayerStat
+	{
+		public int hp;
+		public int mp;
+		public int ad;
+		public float speed;
+
+		public PlayerStat(Jop jop)
+		{
+			if (jop == Jop.Archor)
+			{
+				hp = 100;
+			}
+		}
+	}
+
+	struct MyStruct
+	{
+		public int value1;
+		public int value2;
+	}
+
+	class Student
+	{
+		public string name;
+		public int math;
+		public int english;
+		public int science;
+
+		public float GetAverage()
+		{
+			return (math + english + science) / 3f;
+		}
+	}
+
+	class Car
+	{
+		public string name;
+		public string color;
+
+		public Car(string name, string color)
+		{
+			this.name = name;
+			this.color = color;
+		}
+	}
+
+	class MyClass
+	{
+		public int value1;
+		public int value2;
+	}
+
+	// 구조체 클래스 플레이어 몬스터 비교문부터 하면 됨.
 }
