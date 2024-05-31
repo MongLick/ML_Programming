@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Diagnostics.Contracts;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace _99.LastCheck
 {
@@ -578,11 +580,249 @@ namespace _99.LastCheck
 			Console.WriteLine(t1.value2);
 
 			// 같은 인스턴스를 참조하기 때문에 복사본을 변경하는 경우 원본도 변경이 된다.
+
+			Player player = new Player();
+			player.hp = 100;
+
+			Monster monster = new Monster();
+			monster.damage = 40;
+
+			monster.Attack(player);
+
+			// 구조체로하면 플레이어 체력 100이라는 값을 준거지 실제로 플레이어의 체력을 넣어준 것이 아니다.
+			// 그래서 아무리 데미지를 넣어도 플레이어의 체력은 계속 100이다
+			// 구조체를 복사하면 값 자체를 복사해온다.
+
+			Console.WriteLine(player.hp);
+
+			PlayerClass playerClass = new PlayerClass();
+			playerClass.hp = 100;
+
+			MonsterClass monsterClass = new MonsterClass();
+			monsterClass.damage = 20;
+
+			monsterClass.Attack(playerClass);
+
+			Console.WriteLine(playerClass.hp);
+
+			// 값형식, 참조형식 값형식 복사할 때 실제 값이 복사가 된다. 깊은복사가 이루어짐 구조체는 값형식이다.
+			// 참조형식 복사할 떄 객체주소가 복사된다. 얕은 복사 클래스는 참조형식이다.
+			// 둘의 차이점은 값형식은 데이터가 중요한 경우 사용한다. 값이 복사가된다.
+			// 참조형식은 객체가 중요한 경우 사용을 한다. 객체주소가 복사된다.
+
+			ValueType valueType1 = new ValueType() { value = 10 };
+			ValueType valueType2 = valueType1; // 값이 복사가 된다.
+			valueType2.value = 20;
+			Console.WriteLine(valueType1.value);
+
+			RefType refType1 = new RefType() { value = 10 };
+			RefType refType2 = refType1; // 객체 주소가 복사된다.
+			refType2.value = 20;
+			Console.WriteLine(refType1.value);
+
+			// 값에 의한 호출, 참조에 의한 호출
+			// 값에 의한 호출 (Call by Value) 값형식의 데이터가 전달되며 데이터가 복사되어 전달된다.
+			// 함수의 매개변수로 전달하는 경우 복사한 값이 전달되며 원본은 유지된다.
+
+			// 참조에 의한 호출 (Call by refernce) 참조형식의 데이터가 전달되며 주소가 복사되어 전달된다.
+			// 함수의 매개변수로 전달하는 경우 주소가 전달되며 주소를 통해 접근하기 때문에 원본을 전달하는 효과가 있다.
+
+			ValueType leftValue = new ValueType() { value = 10 };
+			ValueType rightValue = new ValueType() { value = 20 };
+			Swap(leftValue, rightValue);
+
+			Console.WriteLine($"{leftValue.value}, {rightValue.value}"); // 데이터의 복사본이 함수로 들어가기 때문에 원본은 바꾸지 않음
+
+			RefType leftRef = new RefType() { value = 10 };
+			RefType rightRef = new RefType() { value = 20 };
+			Swap(leftRef, rightRef);
+
+			Console.WriteLine($"{leftRef.value}, {rightRef.value}"); // 원본의 주소가 함수로 들어가기 때문에 원본이 바뀐다.
+
+			// 클래스의 얕은 복사, 깊은 복사
+			// 얕은 복사는 객체를 복사할 때 주소값만을 복사하여 같은 원본을 가르키게 된다.
+			// 깊은 복사는 객체를 복샇ㄹ 떄 주소값의 원본을 복사하여 다른 객체를 가지고 있다.
+			RefType original = new RefType() { value = 1 };
+			RefType shallowCopy = original;
+			RefType deepCopy = new RefType();
+			deepCopy.value = original.value;
+
+			Console.WriteLine(original.value);
+			Console.WriteLine(shallowCopy.value);
+			Console.WriteLine(deepCopy.value);
+
+			original.value = 2;
+
+			Console.WriteLine(original.value);
+			Console.WriteLine(shallowCopy.value);
+			Console.WriteLine(deepCopy.value);
+
+			// 결론적으로는 깊은 복사를 하고 싶다면 인스터스를 새로 만들고 거기에 값을 깊게 복사하면된다. new를 따로 하면 된다는 말
+
+			// 값이 필요한 경우 구조체를 사용하고 원본(객체)가 필요하면 클래스를 만들어서 사용하면 된다.
+			// 예를 들어서 몬스터가 플레이러르 따라 다녀야한다면 몬스터가 추가 되었을 때 플레이어를 가르키면 되기에
+			// 얕은 복사로 하면 자동으로 플레이어를 따라가게 할 수 있다.
+			// 타겟을 깊은 복사로 하게 되면 몬스터 마다 따라가고 있는 플레이어는 다 다른 플레이어이기 때문이다.
+			// 예를 들어서 몬스터가 죽으면 아이템을 떨구면 몬스터 a가 죽었을 때 아이템을 먹게 되면 b 몬스터도 같은 아이템이라면
+			// b 몬스터가 가르키기고 있는 아이템이 없기 떄문에 몬스터 각자가 들고 있는 것이라면 깊은 복사를 해줘야한다.
+			// 클래스는 객체를 만들 수 있는 설계도 붕어빵(객체), 붕어빵틀(클래스)
+			// 사람을 만들 수 있는 클래스는 age name이라는 속성을 가지고 있고, 어떤 행동을 할 수 있는 메서드를 가지고 있다.
+			// 이 클래스를 가지고 인스턴스화를 시키면 실체 객체 결과물이 인스턴스이다.
+			// Player player = new Player(); 하면 플레이어 라는 인스턴스를 하나 생성한 것.
+			// player.age player.name player.함수 등 을 사용할 수 있다.
+			// player는 new Player();을 가르키고 있는 것이다. 그래서 player는 주소를 가리키는 것을 가지고 있고
+			// 실제 값은 new Player가 들고 있는 것이다.
+			// player2 = player을 하게 된면 player2는 new Player()을 가르키고 있는 것이다.
+
+			// 메모리 프로그램을 처리하기 위해 필요한 정보를 저장하는 기억장치이다.
+			// 프로그램은 메모리에 저장한 정보를 토대로 명령들을 수행한다.
+			// 메모리구조는 프로그램은 효율적안 메모리 관리를 위해 메모리 영역을 구분한다.
+			// 데이터는 각 열할마다 저장되는 영역을 달리하여 접근범위, 생존범위 등을 관리한다.
+
+			// 메모리 구조는 코드영역(프로그램 코드), 데이터 영역(정적 변수), 힙 영역(클래스 인스턴스), 스택 영역(지역변수, 매개변수)
+			// 로 관리가 된다. 순서대로 코드영역이 낮은 주소이고 스택영역이 높은 주소이다.
+
+			// 코드영역은 프로그램이 실행할 코드가 저장되는 영역이다.
+			// 데이터가 변경되지 않는 읽기 전용 데이터이다.
+
+			// 데이텅역은 정적변수가 저장되는 영역이다.
+			// 프로그램이 시작시 할당되며 종료시 삭제된다.
+			// 상수 같은거 게임 이름이나 최대 인원 수 등 바뀌지 않는 것을 저장해두는 것이다.
+
+			// 스택 영역은 지역변수와 매개변수가 저장되는 영역이다. 
+			// 함수의 호출시 할당되며 함수가 종료되면 삭제가 된다.
+
+			// 힙영역은 클래스 인스턴스가 저장되는 영역이다.
+			// 인스턴스를 생성시 할당되며 더 이상 사용하지 않을시 자동으로 삭제된다.
+			// 인스턴스를 참조하고 있는 변수가 없을 때 더 이상 사용하지 않는다고 판단한다.
+			// 더 이상 사용하지 않는 인스턴스는 가비지 컬렉터가 특정 타이밍에 수거해간다.
+
+			// 변수의 접근범위와 생존범위
+			// 정적변수는 메모리 영역은 데이터 영역이고 접근은 어디서든 가능하고 생존범위는 프로그램 시작부터 끝까지이다.
+			// 지역변수와 매개변수는 스택영역에 저장되고 접근은 블록 내부에서만 가능하고 생존 범위는 블록 시작부터 끝까지이다.
+			// 클래스 인스턴스는 메모리는 힙여역이고 접근범위는 참조가능한 모든 범위를 말한다. 
+			// 생존범위는 인스턴스 생성에서 더 이상 아무도 참조하고 있지 않을 때 가비지 컬렉터가 삭제시킨다.
+
+			// 스택 영역은 함수호출 스택을 이용하여 호출과 종료에 연관되는 데이터를 저장하는 영역이다.
+			// 프로그램은 스택구조를 통해 함수에서 사용한 데이터를 효율적으로 관리한다.
+			// 제일 먼저 호출 된 함수가 제일 아래에 깔리고 새로 호출 된 함수가 위로 쌓이게 되면서
+			// 맨 위에 있는 함수만 신경쓰면 되기 때문에 메모리 관리에 효율적이다.
+
+			// 힙영역은 클래스 인스턴스가 보관하는 영역이다.
+			// 프로그램은 기빚 콜렉터를 통해 더 이상 사용하지 않는 인스턴스를 수거한다.
+			// 함수 시작시 지역 변수가 스택 영역에 저장된다.
+			// 함수 시작시 이미 메모리에 할당되어 있고
+			// 인스턴스를 힙영역에 생성하고 주소값을 지역변수에 담아 둔다.
+			// new가 인스턴스 그래서 new가 힙영역에 저장된다. 인스턴스 == 객체이다.
+
+			// 함수 종료시 지역변수가 함수 종료와 함께 소멸된다.
+			// 인스턴스는 함수 종료와 함꼐 더 이상 참조하는 변수가 없어진다.
+			// 그래서 가비지가 되어 가비지 컬렉터가 동작할 때 소멸하게 된다.
+			// 하나 하나 가비지가 생길 때 마다 삭제하는 것이 아니라 체크를 해두고 한 꺼번에 많은 가비지를 소멸시킨다.
+
+			// 데이터 영역은 정젹변수를 저장하는 영역이다.
+			// 프로그램은 시작시 데이터 영역을 생성하며 종료시 데이터 영역을 해제한다.
+			// 정적 static 프로그램의 시작과 함께 할당, 프로그램 종료시에 소멸, 프로그램이 동작하는 동안 항상 고정된 위치에 존재한다.
+			// 근데 몬스터를 100마리 만든다고 할 때 1마리만 나와도 되는 상황 같은 생성하고 삭제하는 것이 효율적이다.
+			// 근데 만약 정적으로 만들게되면 언제 어디서든 100마리가 다 존재하기 때문에 쓸데 없는 데이터를 사용하게 되므로 이런 경우 사용을 안 한다.
+
+			// class안에 static int count을 하면 원래는 객체.으로 count를 불러야 하지만 정적으로 저장된건 바로 사용이 가능하다.
+			// Console.WriteLine($"학생3의 ID : {student3.GetID()}");
+			// Console.WriteLine($"총 학생수 : {Student.GetCount()}");
+
+			// 이런 식으로 사용한다는 것이다 {student3.GetID()}");는 new를 해서 사용해야 하지만 밑에 꺼는 new를 사용하지 않고 클래스 자체를 불러온 경우디ㅏ.
+
+			Student1 student1 = new Student1();
+
+			Console.WriteLine(student1.GetID());
+			Console.WriteLine(Student1.GetCount());
+
+			Setting.volume = 50;
+			Setting.Reset();
+			// 정적 클래스는 new 해서 인스터를 만들 수가 없다.
+
+			// 정적 클래스 이름 점으로 사용하면 되고
+			// 정적으로 안 만들었으면 new 해서 인스턴스해서 사용하면 된다.
+			// 스택은 고정적인 데이터 값이 있기에 고정된 값을 생성 삭제하면 되기에 힙영역보다 빠르다.
+			// 힙영역은 어디 메모리가 비어있는지 찾고 거기에 new인 인스턴스를 넣어야 하기에 좀 느리다.
+			// 그리고 빈칸이 있으면 앞으로 땡기기 때문에 시간 소요가 조금 있다.
+
+			// 객체지향 프로그래밍 프로그램 설계방법론이자 개념의 일종이다.
+			// 프로그램을 서로 상호작용하는 객체를 기본 단위로 구성하는 방식이다.
+
+			// 절차지향과 객체지향 
+			// 절차지향 : 프로그램의 순차적인 처리를 위주로 설계하는 방법론이다.
+			// 객체지향 : 서로 상호작용하는 객체를 기본 단위로 구성하는 방법론이다.
+
+			// 객체지향의 등장배경
+			// 물리적인 하드웨어의 발전이 빠르게 진행되었으며, 소프트웨어의 중요성이 빠르게 올라간다.
+			// 기존 절차지향의 방식으로는 복자합 구조에 대한 설계가 힘들어져서 객체지향의 방식이 대안이 되었다.
+
+			// 객체지향의 장단점
+			// 장점 : 객체단위로 관리하기 때문에 디버깅이 유리하다.
+			// 클래스 단위로 모듈화 시켜 관리하므로 대규모 프로젝트에 적합하다.
+			// 코드의 재사용성이 좋다.
+			// 단점으로는 설계에 시간이 많이 소비되며 신중해야한다.
+
+			// 객체지향 4특징
+			// 캡슐화 : 객체를 상태와 기능으로 묶는 것을 의미하며, 객체의 내부 상태와 기능을 숨기고, 허용한 상태와 기능만의 액세스를 허용한다.
+			// 다형셩 : 부모클래스의 함수를 자식클래스에서 재정하여 자식클래스의 다른 반응을 구현한다.
+			// 추상화 : 관련 특성 및 엔터티의 상호 작용을 클래스로 모델링하여 시스템의 추상적 표현을 정의한다.
+			// 상속 : 부모클랫의 모든 기능을 가지는 자식클래스를 설계하는 방법이다.
+
+			// 객체설계 5원칙
+			// 단일 책임 원칙 객체는 오직 하나의 책임을 가져야한다.
+			// 개방 폐쇄 원칙 객체는 확장에 대해서는 개방적이고 수정에 대해서는 페쇄적이여야한다.
+			// 리스코프 치환 원칙 자실 클래스는 언제나 자신의 부모클래스를 대체할 수 있어야한다.
+			// 인터페이스 분리 원칙 인터페이스는 작은 단위들로 분리시켜 구성하며 사용하지 않는 함수는 포함하지 않아야 한다.
+			// 의존적성 역전 원칙 객체는 하위클래스 보다 상위 클래스에 의존해야한다.
+
+			Driver driver = new Driver() { name = "드라이버" };
+			Vehicle motorBike = new Vehicle() { name = "오토바이" };
+
+			driver.Ride(motorBike);
+
+			// 캡슐화 객체를 정보와 기능으로 묶는 것을 의미한다.
+			// 객체의 내부 정봐 기능을 숨기고, 허용한 정보와 기능만의 액세스 허용한다.
+
+			// 캡슐화 객체를 정보와 기능으로 묶는 것, 객체의 정보와 기능을 멤버라고 표현한다.
+			// 현실서계의 객체를 표현하기 위해 객체가 가지는 정보와 행동을 묶어 구현하며 이를 통해 객체가 상호작용한다.
+
+			// 접근제한자 외부에서 접근이 가능한 멤버변수와 멤버함수를 지정하는 기능
+			// 접근제한자를 지정하지 않는 경우 기본접근제한자는 private
+			// public 외부에서도 사용가능 private 외부에서 사용제한 protectedd 사송한 클래스 public 그외는 private
+
+			AccessSpecifier instance = new AccessSpecifier();
+			instance.publicValue = 3; // 접근이 가능하지만 privateValue는 접근이 불가능하다.
+
+			// 정보은닉 객체 구성에 있어서 외부에서 사용하기 원하는 기능과 원하지 않는 기능을 구분하기 위해서 사용한다.
+			// 사용자가 객체를 사용하는데 있어서 필요한 기능만을 확인하기 위한 용도이며
+			// 외부에 의해 영향을 받지 않길 원하는 기능을 감추기 위한 용도이기도하다.
+
+			Bank bank = new Bank();
+			// balance를 직접적으로 접근을 불가능하게 막아둔 것
+			// 외부에서는 Bank에서 의도한 save load를 통해 bank룰 다르게 유도
+			bank.Save(20000);
+			bank.Load(10000);
+
+			// 캡슐화 사용의미 캡슐화된 클래스는 외부에서 사용하기 위한 인터페이스만을 제공하여 복잡성을 감소시킨다.
+			// 캡슐화된 클래스는 내부적으로 어떻게 구현되었는지 몰라도 사용이 가능하다.
+
+			// 상속 부모클래스의 모든 기능을 가지는 자식클래스를 설계하는 방법이다.
+			// is-a관계이다 부모클래스가 자식클래스를 포함하는 상위개념일 경우 상속관계가 적합하다.
+
+			// 상속 부모클래스를 상속하는 자식클래스에게 부모클래스의 모든 기능을 부여한다.
+			// class 자식 : 부모
+			// 만약 몬스터 이름을 상속 받지 않게 하면 모든 모든스터에 이름을 계속 선언해줘야한다(변수말하는 것)
+			// 아래와 같이 몇 줄 안 되더라도 몬스터가 5천 종류가 있다면 밑에 코드를 5천개 복붙해야하기에
+			// 그럴 경우 상속을 하는게 낫다.
+
+			// 그러닌까 is - a 관게가 드래곤은 몬스터다 이런 것을 말한다. 드래곤은 날 수 있다. 이건 상속이 아님.
 		}
 
 
 
-
+		// 함수 ///////////////////////////////////////////////////////////////////////////
 
 
 
@@ -650,7 +890,27 @@ namespace _99.LastCheck
 		static int Multi(int left, int right) { return left * right; }
 		static float Multi(float left, float right) { return left * right; }
 		static double Multi(double left, float right) { return left * right; } // 이런식으로 매개변수가 반환형이 달라도 할 수 있다.
+
+		static void Swap(ValueType left, ValueType right)
+		{
+			int temp = left.value;
+			left.value = right.value;
+			right.value = temp;
+		}
+
+		static void Swap(RefType left, RefType right)
+		{
+			int temp = left.value;
+			left.value = right.value;
+			right.value = temp;
+		}
 	}
+
+
+
+	// 구조체, 클래스 /////////////////////////////////////////////////////////////////////
+
+
 
 	enum Direction
 	{
@@ -752,5 +1012,226 @@ namespace _99.LastCheck
 		public int value2;
 	}
 
-	// 구조체 클래스 플레이어 몬스터 비교문부터 하면 됨.
+	struct Player
+	{
+		public int hp;
+	}
+
+	struct Monster
+	{
+		public int damage;
+
+		public void Attack(Player player)
+		{
+			player.hp -= damage;
+		}
+	}
+
+	class PlayerClass
+	{
+		public int hp;
+	}
+
+	class MonsterClass
+	{
+		public int damage;
+
+		public void Attack(PlayerClass playerClass)
+		{
+			playerClass.hp -= damage;
+		}
+	}
+
+	struct ValueType
+	{
+		public int value;
+	}
+
+	class RefType
+	{
+		public int value;
+	}
+
+	class Student1
+	{
+		private static int count;
+
+		private int id;
+
+		public Student1()
+		{
+			id = ++count;
+		}
+
+		public static int GetCount()
+		{
+			return count;
+		}
+
+		public int GetID()
+		{
+			return id;
+		}
+	}
+
+	static class Setting
+	{
+		public static int volume;
+
+		public static void Reset()
+		{
+			volume = 10;
+		}
+
+		// 정적 클래스에서는 정적이 변수, 함수가 아니면 포함이 불가능하다.
+	}
+
+	class Driver
+	{
+		public string name;
+
+		public void Ride(Vehicle Vehicle)
+		{
+			Console.WriteLine($"{name}이 {Vehicle.name}을 운전합니다.");
+		}
+	}
+
+	class Vehicle
+	{
+		public string name;
+		public int speed = 0;
+
+		public void Move()
+		{
+			speed += 10;
+			Console.WriteLine($"{name}의 속도가 {speed}으로 증가합니다.");
+		}
+	}
+
+	class Capsule
+	{
+		private int veriable; // 멤버변수 정보를 표현
+		private void Function() // 멤버함수 기능을 표현
+		{
+
+		}
+	}
+
+	class AccessSpecifier
+	{
+		public int publicValue;
+		private int privateValue;
+
+		void Function()
+		{
+			publicValue = 1;
+			privateValue = 2; // 같은 클래스이면 접근이 가능하다.
+		}
+	}
+
+	class Bank
+	{
+		int balance;
+
+		public void Save(int money)
+		{
+			balance += money;
+		}
+
+		public void Load(int money)
+		{
+			balance -= money;
+		}
+	}
+
+	class VeryComplicatedObject
+	{
+		int veryComplicatedValue1; // 캡슐화된 클래스의 private는 외부에서 접근불가하므로 사용할 수 없다.
+
+		void VeryComplicatedFunction1() 
+		{
+
+		}
+		
+		// 캡슐화된 클래스의 public은 외부에서 접가능하므로 사용을 권장하는 기능이다.
+		public void UseThisFunction()
+		{
+
+		}
+
+		// 남의 코드를 사용할 떄 private는 무시해도 될 정도이다 public으로 풀어준 것만 보고 사용하면 된다.
+	}
+
+	class IntArray
+	{
+		int[] array = new int[10];
+
+		public void Setvalue(int index, int value)
+		{
+			if (index < 0 || index >= 10)
+			{
+				return;
+			}
+
+			array[index] = value;
+		}
+	}
+
+	class Monster1
+	{
+		protected string name;
+		protected int hp;
+
+		public void Move()
+		{
+			Console.WriteLine($"{name}이 움직입니다.");
+		}
+
+		public void TakeHit(int damage)
+		{
+			hp -= damage;
+			Console.WriteLine($"{name}이{damage}를 받아 체력이{hp}이 되었습니다.");
+		}
+	}
+
+	class Dragon : Monster1
+	{
+		public int damage;
+
+		public Dragon()
+		{
+			name = "드래곤";
+			hp = 100;
+		}
+
+		public void Breath()
+		{
+			Console.WriteLine($"{name}이 브레스를 뿜습니다.");
+		}
+	}
+
+	class DragonRed : Dragon
+	{
+		public DragonRed()
+		{
+			damage = 100;
+			name = "드래곤레드";
+		}
+	}
+
+	// 이렇게 사용하면 드래곤, 몬스터를 둘 다 상속을 받은거라 전부 사용이 가능하게 된다. 상속에 상속인 느낌
+
+	class Slime : Monster1
+	{
+		public Slime()
+		{
+			name = "슬라임";
+			hp = 5;
+		}
+
+		public void Split()
+		{
+			Console.WriteLine($"{name} 이/가 분열합니다.");
+		}
+	}
 }
