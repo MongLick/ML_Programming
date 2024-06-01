@@ -818,6 +818,25 @@ namespace _99.LastCheck
 			// 그럴 경우 상속을 하는게 낫다.
 
 			// 그러닌까 is - a 관게가 드래곤은 몬스터다 이런 것을 말한다. 드래곤은 날 수 있다. 이건 상속이 아님.
+
+
+			Dragon dragon = new Dragon();
+			Slime slime = new Slime();
+
+			// 부모클래스 Monster를 상속한 자식클래스는 모두 부모클래스의 기능을 가지고 있음
+			dragon.Move();
+			slime.Move();
+
+			// 자식클래스는 부모클래스의 기능에 자식만의 기능을 더욱 추가하여 구현 가능
+			dragon.Breath();
+			slime.Split();
+
+			// 업캐스팅 : 자식클래스는 부모클래스 자료형으로 묵시적 형변환 가능
+			Hero hero = new Hero();
+			hero.Attack(dragon);
+			hero.Attack(slime);
+
+
 		}
 
 
@@ -1234,4 +1253,23 @@ namespace _99.LastCheck
 			Console.WriteLine($"{name} 이/가 분열합니다.");
 		}
 	}
+
+	class Hero
+	{
+		int damage = 3;
+		
+		public void Attack(Monster1 monster)
+		{
+			monster.TakeHit(damage);
+		}
+
+		// 만약에 몬스터라는 상속 구조를 하지 않았다면 드래곤 떄리기, 슬라임 때리기를 전부 구현했어야한다!!
+
+		public void Attack2(Dragon dragon)
+		{
+			// 위에처럼 안했으면 이런식으로 모든 몬스터를 넣었어야 한다.
+		}
+	}
+
+
 }
