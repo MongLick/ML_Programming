@@ -836,7 +836,42 @@ namespace _99.LastCheck
 			hero.Attack(dragon);
 			hero.Attack(slime);
 
+			// 밑에 있는 것이 업 캐스팅이다.
+			Monster1 monster1 = new Monster1();
+			hero.Attack(monster1);
 
+			// 다운캐스팅 : 부모클래스는 자식킄래스 자료형으로 명시적 형변환이 가능하다.
+			Dragon d = (Dragon)monster1;
+			Slime s3 = (Slime)monster1; // 인스턴스가 slime이 아니기 때문에 변환시 오류가 발생한다.
+			// 둘 다 오류문구.
+
+			if(monster is Dragon)
+			{
+				Dragon isDraong = (Dragon)monster1;
+			} // 형변환이 가능한지 확인 후 해주기.
+
+			Dragon isDragon = monster1 as Dragon; // 형변환이 가능하다면 해주고 할 수 없다면 null을 반환해준다.
+
+			// 개구리 클래스가 있으면 육지, 해양 생물이라는 2개 클래스를 가질 수 없다.
+			// 상속은 1개 클래스만 받을 수 있다.
+
+			// 상속 사용의미
+			// 상속을 진행하는 경우 부모클래스의 소스가 자식클래스에서 모두 적용이된다.
+			// 부모클래스와 자식캘르스의 상속관계가 적합한 경우 부모클래스에서의 기능 구현이 자식클래스에서도 어울린다.
+			// 부모 클래스에서 기능을 구현할 경우 모든 부모를 상속하는 자식클래스에 기능을 구현하는 효과를 가지고 있다.
+			// 자식 클래스에서 자식클래스만의 기능을 구현할 수 있다
+
+			// 사용의미 2
+			// 업캐스팅을 통해 자식클래스는 부모클래스로 형변환이 가능하다.
+			// 자식클래스는 부모클래스를 요구하는 곳에서 동일한 기능을 수행할 수 있다.
+
+			Child1 child1 = new Child1();
+			Child2 child2 = new Child2();
+			Child3 child3 = new Child3();
+
+			UseParent(child1);
+			UseParent(child2);
+			UseParent(child3);
 		}
 
 
@@ -922,6 +957,11 @@ namespace _99.LastCheck
 			int temp = left.value;
 			left.value = right.value;
 			right.value = temp;
+		}
+
+		static void UseParent(Parent parent)
+		{
+			parent.Func();
 		}
 	}
 
@@ -1270,6 +1310,12 @@ namespace _99.LastCheck
 			// 위에처럼 안했으면 이런식으로 모든 몬스터를 넣었어야 한다.
 		}
 	}
-
+	class Parent
+	{
+		public void Func() { }
+	}
+	class Child1 : Parent { }
+	class Child2 : Parent { }
+	class Child3 : Parent { }
 
 }
