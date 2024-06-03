@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.Contracts;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace _99.LastCheck
 {
@@ -841,11 +842,11 @@ namespace _99.LastCheck
 			hero.Attack(monster1);
 
 			// 다운캐스팅 : 부모클래스는 자식킄래스 자료형으로 명시적 형변환이 가능하다.
-			Dragon d = (Dragon)monster1;
-			Slime s3 = (Slime)monster1; // 인스턴스가 slime이 아니기 때문에 변환시 오류가 발생한다.
+			// Dragon d = (Dragon)monster1;
+			// Slime s3 = (Slime)monster1; // 인스턴스가 slime이 아니기 때문에 변환시 오류가 발생한다.
 			// 둘 다 오류문구.
 
-			if(monster is Dragon)
+			if (monster is Dragon)
 			{
 				Dragon isDraong = (Dragon)monster1;
 			} // 형변환이 가능한지 확인 후 해주기.
@@ -872,8 +873,431 @@ namespace _99.LastCheck
 			UseParent(child1);
 			UseParent(child2);
 			UseParent(child3);
-		}
 
+			// 추상화 클래스를 정의할 당시 구체화 시킬 수 없는 기능을 추상적 표현으로 정의한다.
+			// 추상클래스는 abstract class 하나 이상의 추상 함수를 포함하는 클래스이다.
+			// 클래스가 추상적인 표현을 정의하는 경우 자식에서 구체화시켜 구현할 것을 염두하고 추상화 시킨다.
+			// 추상클래스에서 내용을 구체화 할 수 없는 추상함수는 내용을 정의하지 않는다.
+			// 추상클래스를 상속하는 자식클래스가 추상 함수를 재정하여 구체화한 경우 사용이 가능하다.
+
+			// 추상화 클래스는 new 해서 인스턴스 생성자체가 불가능하다.
+			// 추상클래스를 구체화한 자식클래스는 인스턴스 생성이 가능하여 아래와 같이 사용을 해야한다.
+			Item potion = new Potion();
+			potion.Use();
+			Item herb = new Herb();
+			herb.Use();
+
+			// 추상화 사용의미 객체들의 공통적인 특징을 도출하는데 의미가 있다.
+			// 구현을 구체화하기 어려운 상위클래스를 설계하기 위한 수단으로 사용한다.
+
+			// 다형성 객체의 속성이나 기능이 상황에 따라 여러가지 형태를 가질 수 있는 성질이다.
+			// 다형성 부모클래스의 멤버를 자식클래스가 상황에 따라 여러가지 형태를 가질 수 있는 성질이다.
+
+			Car1 car1 = new Truck();
+			Car1 car2 = new SprotCar();
+
+			car1.Move();
+			car2.Move();
+
+			// 가상함수와 오버라이딩
+			// 가상함수 : 부모클래스의 함수 중 자식클래스에 의핸 재정의 할 수 있는 함수를 지정한다.
+			// 오버라이딩 : 부모클래스의 가상함수를 같은 함수이름과 같은 매개변수로 재정하여 자식만의 반응울 구현한다.
+
+			// 다형성 사용의미
+			// 새로운 클래스를 추가하거나 확장할 때 기존 코드에 영향을 최소화한다.
+			// 새로운 클래스를 만들 때 기존의 소스를 수정하지 않아도 된다.
+
+			// 인터페이스 인터페이스는 멤버를 가질 수 있지만 직업 구현하지 않을 단지 정의만을 가진다.
+			// 인ㅌ페이스를 가지는 클래스에서 반드시 인터페이스의 정의를 구현해야한다.
+			// 이를 반대로 표현하자면 인터페이스를 포함하는 클래스는 반드시 클래스의 구성 요소들을 구현했다라는 것을 보장한다.
+			// can - a 관계 클래스가 해당 행동을 할 수 있는 경우 적합하다.
+
+			// 인터페이스 정의
+			// 일반적으로 인터페이스의 이름은 I로 시작한다.
+			// 인터페이스의 함수는 직접 구현하지 않고 정의만 진행한다.
+
+			// 인터페이스 포함
+			// 상속처럼 정의한 인터페이스를 클래스 : 뒤에 선언하여 사용한다.
+			// 인터페이스를 포함하는 경우 반드시 인터페이스에서 정의한 함수를 구현해야한다.
+			// 인터페이스는 여러개 포함이 가능하다
+
+			// 인터페이스 사용
+			// 인터페이스를 이용하여 기능을 구현할 경우
+			// 클래스의 상속관계와 무관하게 행동의 기능여부로 상호작용 기능이다.
+
+			Player2 player1 = new Player2();
+			Door door = new Door();
+			Box box = new Box();
+			Town town = new Town();
+
+			player1.Enter(door);
+			player1.Enter(town);
+
+			player1.Open(box);
+			player1.Open(door);
+
+			IEnterable enterable;
+			enterable = new Door();
+			enterable = new Town();
+
+			Monster2 monster2 = new Monster2();
+			player1.Attack(monster2);
+
+			// 추상클래스와 인터페이스 
+			// 인터페이스는 추상클래스의 일종으로 특징이 동일하다.
+			// 함수에 대한 선언만 정의하고 이를 포함하는 클래스에서 구체화하여 사용한다.
+			// 하지만 추상클래스와 인터페이스를 톨해 얻는 효과는 다르며 다른 역할을 수행한다.
+			// 개발잘는 인터페이스와 추상클래스중 더욱 상황에 적합한 것으로 구현해야한다.
+
+			// 추상 클래스와 인터페이스
+			// 공통점 : 함수에 대한 선언만 정의하고 이를 포함하는 클래스에서 구체화하여 사용한다.
+			// 차이점 : 추상클래스 - 변수, 함수의 구현 포함이 가능 다중 상속이 불가능하다.
+			// 인터페이슨느 변수, 함수의 구현 포함이 불가능하다 다중 포함이 가능하다.
+
+			// 설계도 추상 클래스는 is a 관계이다
+			// 상속 관계인 경우 자식클래스가 부모 클래스의 하위 분류인 경우이다.
+			// 상속을 통해 얻을 수 있는 효과를 얻을 수 있다.
+			// 부모클래스의 기능을 통해 자식크래스의 기능을 확장하는 경우에 사용한다.
+
+			// 계약서 
+			// 인터페이스 a can b 관계이다
+			// 행동 퐇마인경우 클래스가 해당 행동을 할 수 있는 경우이다.
+			// 인터페이슬르 사용하는 모든 클래스와 상호작용이 가능한 효과를 얻을 수 있다.
+			// 인터페이스에 정의된 함수들을 클래스의 목적에 맞게 기능을 구현하는 경우에 사용한다.
+
+			// 결론 : 가상함수는 부모클래스 함수 중 자식클래스에 의해 재정의 하는 것 virtual
+			// 추상화는 구현을 하지 않고 자식에서 구현을 시키는 것 abstract
+			// 인터페이스는 구현을 하지 않고 자식에서 구현을 시키는 것 interface
+			// 추상화 인터페이스 차이점은 is a a can b 차이점인 것
+
+			// 배열 동일한 자료형의 요소들로 구성된 데이터 집합이다
+			// 인덱스를 통하여 배열요소에 접근할 수 있다.
+			// 배열의 처음 요소의 인덱스는 0부터 시작한다.
+
+			// 배열 기본
+			// 배열을 만들기 위해 자료형과 크기를 정하여 생성한다.
+			// 배열의 요소에 접근하기 위해 인덱스를 사용한다.
+			// 배열의 Length를 통해 크기를 확인한다.
+			// 자료형[] 배열이름 = new 자로형[크기]; 로 이루어져있다.
+
+			int[] scores = new int[5];
+
+			scores[0] = 10;
+			scores[1] = 20;
+			scores[2] = 30;
+			scores[3] = 40;
+			scores[4] = 50;
+
+			Console.WriteLine($"{scores[0]}");
+			Console.WriteLine($"{scores[1]}");
+			Console.WriteLine($"{scores[2]}");
+			Console.WriteLine($"{scores[3]}");
+			Console.WriteLine($"{scores[4]}");
+
+			// 배열 선언 및 초기화
+			int[] array1; // 배열 변수 선언
+			array1 = new int[3]; // 데이터를 10개 가지는 배열 생성
+			int[] array2 = new int[3] { 1, 2, 3 }; // 크기가 3개인 배열을 선언하고 배열 요소들을 초기화
+			int[] array3 = new int[] { 1, 2, 3 }; // 배열의 요소들을 초기화하는 경우 배열의 크기를 선언을 생략가능하다.
+			int[] array4 = { 1, 2, 3, 4 }; // 배열의 요소들을 초기화하는 경우 배열 생성도 생략가능하다.
+
+			// 배열의 구현 원리
+			// c#의 배열은 array 클래스를 통해 구현된다.
+			// 따라서 array 클래스의 모든 특징을 가진다.
+			// Array 클래스의 정적 함수를 활용하여 다양한 기능 사용 기능
+
+			int[] array = { 1, 3, 5, 4, 2 };
+			int length = array.Length;
+			int max = array.Max();
+			int min = array.Min();
+			// 배열의 크기 최대값 최소값
+
+			Array.Sort(array); // 배열 정렬
+			Array.Reverse(array); // 배열 반전
+			int index = Array.IndexOf(array, 3); // 배열 탐색
+
+			int[] shallow = array;
+			int[] deep = new int[array.Length];
+			Array.Copy(array, deep, array.Length);
+
+			// 배열의 얕은 복사 동일한 인스터를 참조한다.
+			// 배열의 깊은 복사 새로운 인스턴스를 생성하고 복사한다.
+
+			array[0] = 0;
+			Console.WriteLine(array[0]);
+			Console.WriteLine(shallow[0]);
+			Console.WriteLine(deep[0]);
+
+			// 인덱스
+			// 배열은 요소들을 메모리에 연속적으로 배치하는 원리로 구현
+			// 이를 이용하여 배열의 특정요소의 메모리주소를 계산할 수 있다.
+			// 1번째 배열 요소 메모리 주소 == 배열 시작 메모리주소 + (i * 자료형의크기)
+			// 이를 인덱스라고 표현한다.
+
+			// 다차원 배열
+			// 배열의 []괄호 안에 차원수 만큼 ','를 추가한다.
+			// 배열의 크기가 차원마다 동일하다.
+			int[,] matrix1 = new int[3, 4]; // 2차원 배열선언 3이 세로 4가 가로
+			matrix1[2, 1] = 10;
+			Console.WriteLine(matrix1[2, 1]);
+			Console.WriteLine(matrix.GetLength(0));
+			Console.WriteLine(matrix.GetLength(1));
+
+			int[,,] cube1 = { { { 1, 2 }, { 3, 4 }, }, { { 5, 6 }, { 7, 8 } } };
+
+			// 가변 배열
+			// 배열의 []괄호를 배열 갯수만큼 추가한다.
+			// 배열의 크기를 각각 설정이 가능하다.
+			int[][] jagged = new int[3][];
+			jagged[0] = new int[5];
+			jagged[1] = new int[2];
+			jagged[2] = new int[3];
+
+			// 배열과 반복
+			// 배열의 인덱스를 반복하여 증가시키며 상용하는 경우 배열의 모든 요소를 반복 수행하는데 용이하다.
+			int[] ints = { 1, 2, 3, 4, 5 };
+			for (int i = 0; i < array.Length; i++)
+			{
+				Console.WriteLine(ints[i]);
+			}
+
+			int[,] tile = { { 1, 2, 3 }, { 4, 5, 6 } };
+			for (int y = 0; y < tile.GetLength(0); y++)
+			{
+				for (int x = 0; x < tile.GetLength(1); x++)
+				{
+					Console.WriteLine(tile[y, x]);
+				}
+				Console.WriteLine();
+			}
+
+			// stirng은 문자들의 집합으로 펴햔된다.
+			// 내부적으로 문자 배열을 통해서 구현된다.
+			// 문자열은 텍스트를 나타내는데 사용되는 char의 순차적 집합이다.
+
+			string str = "abcde";
+			Console.WriteLine(str);
+
+			// string은 char의 순차적 집합으로 표현한다.
+			Console.WriteLine(str[1]);
+			Console.WriteLine(str[2]);
+			// 단 배열식으로 접근하여 문자를 변경할 수는 없다.
+
+			char[] array5 = new char[5] { 'a', 'b', 'c', 'd', 'e' };
+			Console.WriteLine(array5);
+			foreach (char c in array)
+			{
+				Console.WriteLine(c);
+			}
+
+			// stirng 불변성
+			// stirng은 특징상 다른 기본자료형과 다르게 크기가 정해져 있지 않은 기본 자료형이다.
+			// 이유는 string은 char 집합이므로 char의 갯수에 따라 크기가 유동적이다.
+			// 따라서 string은 런타임 당시에 크기가 결정되며 그 크기가 일정하지 않다.
+			// 이에 string은 다른 기본자료형과 다르게 구조체가 아닌 클래스로 구현되어 있다. 런타임시 크기를 정할 수 있는 메모리는 힙영역을 사용한다.
+			// 단 기본자료형과 같이 값형식을 구현하기 위해 string 클래스에 처리를 값형식처럼 동작하도록 구현한다.
+			// 이를 구현하기 위해 string간의 대입이 있을 경우 참조에 의한 주소값 복사가 아닌 갚은 복사를 진행한다.
+			// 결과적으로 데이터 자체를 복사하는 값형식으로 사용하지만 힙영역을 사용하기 때문에 string이 설정되면 변경할 수 없도록 하는 불변성을 가진다.
+
+			string str1 = "abcde";
+			str1 = "abc";
+			str1 = str1 + "123";
+
+			string str2 = str1;
+			// 힙영역에 abcde 문자열을 저장하며 이를 str이 참조한다.
+			// 새로운 힙영역에 abc 문자열을 저장하며 이를 str이 참조한다.
+			// 새로운 힙영역에 abc123 문자를 저장하며 이를 str이 참조한다.
+			// class 이지만 string은 값형식처럼 사용되어야하기때문에 힙영역에 abc123 문자을 복사하여 str2가 참조하도록 하게한다.
+
+			// 메모리 파편화
+			// string이 불변성 특징을 가지므로 새로운 데이터를 string에 할당할 때 마다 기존 데이터는 버려진다.
+			// 이 버려지는 힙영역의 데이터는 가비지컬렉터의 대상이 되며 이를 반본적으로 진행할 경우 가비지컬렉터에 부담이 된다.
+			// 여러 string의 할당을 반본적으로 변경하는 경우를 주의해야 프로그램의 안정성을 높일 수 있다.
+
+			// 문자열 붙이기 연산자 사용
+			// +연산 : 권장하지 않는 방법 가비지컬렉터에 부담이 많이 된다.
+			// abc123def456 문자열을 얻어 내기 위해 abc def avc123 abc123def이 발생한다.
+			string str3 = "abc" + 123 + "def" + 456;
+			//string.Format
+			// 가비지 컬렉터에 부담이 되지 않도록 설계뙨 문자열 사용 방법이다.
+			// 프로그램 동장 죽 각 항목이 매개변수 목록의 값으로 표현을 바꿈
+
+			string str4 = string.Format("abc{0}def{1}", 123, 456);
+
+			// 문자열 보간 string.Format의 간략한 표현
+			// 문자열 형식을 지정하는 더욱 읽기 쉽고 편리한 구문을 제공한다.
+
+			string str5 = $"abc{123}def{456}";
+
+			// 문자열 간격 및 형식
+			// 문자열 형식을 표현하는데 값의 간격과 형식을 정한다.
+			// 문자열 간격
+			Console.WriteLine($"{"ABC",-5}!"); // 뒤에 -5칸을 한 뒤 !를 붙임
+			Console.WriteLine($"{"ABC",+5}!"); // 앞에 +5칸을 한 뒤에 !를 붙임
+			Console.WriteLine($"{"ABC",-5}!{"DEF",+5}!"); //뒤에 -5 뒤 !를하고 !기준으로 +5칸 간 뒤 !를 붙임
+			Console.WriteLine($"{"ABC",+5}!{"DEF",-5}!");
+
+			// 문자열 형식
+			// 10진수 형식
+			Console.WriteLine($"{255:D5}");
+			Console.WriteLine($"{0xFF:D5}");
+			// 16진수 형식
+			Console.WriteLine($"{255:X5}");
+			Console.WriteLine($"{0xFF:X5}");
+			// 숫자 형식
+			Console.WriteLine($"{123456789:N2}");
+			// 고정소수점 형식
+			Console.WriteLine($"{0.555:F2}, {0.554:F2}");
+			// 부동소수점 형식
+			Console.WriteLine($"{123.4567:E3}");
+			// 문자열 간격과 형식
+			Console.WriteLine($"{123.456,+8:F2}");
+
+			// stringBuilder
+			// 일정 버퍼를 사용하는 방식으로 가비지 컬렉터에 부담되지 않도록 설계된다.
+
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < 10; i++)
+			{
+				sb.Append((char)65 + 1);
+				sb.Append(":");
+				sb.Append(65 + i);
+				sb.AppendLine();
+			}
+
+			string str7 = sb.ToString();
+			Console.WriteLine(str7);
+
+			// 일반화 클래스 또는 함수가 코드에 의해 선언되고 인스턴스될 때 까지 형식의 사양을 연기하는 디자인이다.
+			// 기능을 구현한 뒤 자료형을 사용 당시에 지정해서 사용한다.
+			// 일반화 함수 
+			// 일반화는 자료형의 형식을 지정하지 않고 함수를 정의한다.
+			// 기능을 구현한 뒤 사용 당시에 자료형의 형식을 지정해서 사용한다.
+
+			int[] iSrc = { 1, 2, 3, 4, 5 };
+			float[] fSrc = { 1f, 2f, 3f, 4f, 5f };
+			double[] dSrc = { 1d, 2d, 3d, 4d, 5d };
+
+			int[] iDst = new int[iSrc.Length];
+			float[] fDst = new float[fSrc.Length];
+			double[] dDst = new double[dSrc.Length];
+
+			// 일반화된 함수로 자료형과 문관한 함수 구현
+			ArrayCopy<int>(iSrc, iDst);
+			ArrayCopy<float>(fSrc, fDst);
+			ArrayCopy<double>(dSrc, dDst);
+
+			char[] cSrc = { 'a', 'b', 'c' };
+			char[] cDst = new char[cSrc.Length];
+			ArrayCopy(cSrc, cDst);
+			//일반화 자료형을 매개변수를 통해 추측가능한 경우 생략도 가능하다.
+
+			StructT<int> structT = new StructT<int>();
+			NewT<int> newT = new NewT<int>();
+			ParentT<Parent1> parentT = new ParentT<Parent1>();
+			ParentT<Child> childT = new ParentT<Child>();
+			InterfaceT<int> interT = new InterfaceT<int>();
+
+			// int는 주로체이므로 struct 제약조건이 있는 일반화 자료형에 사용이 가능하다.
+			// ClassT<int> classt = new Class<int>(); int는 구조체이므로 class 제약 조건이 있어서 사용이 불가능.
+			// int는 new int(); 생성자가 있으므로 사용이 가능하다.
+			// Parent는 Parent 파생클래스이므로 사용 가능하다.
+			// Child는 Parent 파생클래스이므로 사용이 가능하다.
+			// int는 IComparable 인터페이스를 포함하므로 사용이 가능하다.
+
+			// 예외처리 프로그램 동작 도중 발생하는 의도하지 않은 상황을 처리하는 방법이다.
+
+			// 조건문을 통한 예외처리
+			// 프로그램이 중단될 수 있을만한 처리를 조건문을 통해 진행할 수 없도록 제한하는 것
+			// 가장 좋은 예외처리 방법은 처음부터 예외가 발생할 수 없도록 설계하는 것이다.
+
+			float value1 = 10.0f;
+			float value2 = 0.0f;
+
+			// 만약에 value2가 0인 경우 예외처리를 진행하지 않으면 프로그램이 중단된다.
+			// 아래의 조건문을 통해 프로그램이 중단되는 상화에 대한 예외처리를 진행해야한다.
+
+			if(value2 != 0)
+			{
+				float result1 = value1 / value2;
+				Console.WriteLine(result1);
+			}
+			else
+			{
+				Console.WriteLine("0으로 나눌 수 없습니다.");
+			}
+
+			// try catch 예외처리
+			// 예외가 발생할 수 있는 구문을 지정하고 진행중 예외가 바생할 경우 발생한 예외를 처리하는 구믄을 작성
+			// try : 예외발생에 대한 검사의 범위를 지정하는 블록
+			// cahch : 발생한 예외를 처리하는 블록
+
+			try
+			{
+				// try 구문 수행중 처리할 수 없는 예외상황 발생시
+				// cahth 구문중 처리할 수 있는 예외처리 부분이 실행된다.
+
+				Console.WriteLine();
+				string input1 = "10";
+
+				int value5 = int.Parse(input1);
+				int[] array6 = new int[value5];
+
+				array6[10] = 10;
+			}
+
+			catch (FormatException ex)
+			{
+				Console.WriteLine(ex.Message);
+				Console.WriteLine("입력값이 정수로 변환이 불가한 경우 예외 발생");
+			}
+			catch (OverflowException ex)
+			{
+				Console.WriteLine(ex.Message);
+				Console.WriteLine("입력값으로 배열을 만들 수 없는 경우 예외 발생");
+			}
+			catch (IndexOutOfRangeException ex)
+			{
+				Console.WriteLine(ex.Message);
+				Console.WriteLine("입력값이 10 이하인 경우 [10] 인덱스 접근이 불가하여 예외 발생");
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				Console.WriteLine("모든 예외 상황을 확인하고 예외 발생시 처리");
+			}
+
+			// throw 예외 발생
+			// 의도적으로 예외를 발생시키는 방법이다.
+			// 프로그램에서 치명적일 수 있는 동작이 예상되는 경우 예외 처리를 유동하기 위해 진행한다.
+
+			try
+			{
+				int[] array7 = { 1, 3, 5, 7, 9 };
+				int index1 = Array.IndexOf(array, 0);
+
+				if(index < 0)
+				{
+					throw new InvalidOperationException();
+				}
+
+				array7[index1] = 0;
+			}
+			catch (InvalidOperationException ex)
+			{
+				Console.WriteLine(ex.Message);
+				Console.WriteLine("배열에서 원하는 값을 찾지 못함");
+			}
+
+			try
+			{
+				Func1();
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+		}
 
 
 		// 함수 ///////////////////////////////////////////////////////////////////////////
@@ -963,359 +1387,659 @@ namespace _99.LastCheck
 		{
 			parent.Func();
 		}
-	}
 
-
-
-	// 구조체, 클래스 /////////////////////////////////////////////////////////////////////
-
-
-
-	enum Direction
-	{
-		Up, Down, Left, Right
-	}
-
-	enum Season
-	{
-		Spring, // 0
-		Summer, // 1
-		Autumn = 20, // 20
-		Winter // 21
-	}
-
-	struct StudentInfo
-	{
-		public string name;
-		public int math;
-		public int english;
-		public int science;
-
-		public float Average()
+		public static void ArrayCopy<T>(T[] source, T[] output)
 		{
-			return (math + english + science) / 3f;
-		}
-	}
-
-	struct Point
-	{
-		public int x;
-		public int y;
-
-		public Point(int x, int y)
-		{
-			// 초기화에서 모든 구조체 변수를 초기화라지 않으면 에러가 발생한다.
-			this.x = x;
-			this.y = y;
-			// this는 자기 자신을 가르킨다.
-		}
-	}
-
-	enum Jop
-	{
-		Archor,
-		Mage,
-		Knight
-	}
-
-	struct PlayerStat
-	{
-		public int hp;
-		public int mp;
-		public int ad;
-		public float speed;
-
-		public PlayerStat(Jop jop)
-		{
-			if (jop == Jop.Archor)
+			for (int i = 0; i < source.Length; i++)
 			{
+				output[i] = source[i];
+			}
+		}
+
+		public T Bigger<T> (T left, T right) where T : IComparable<T>
+		{
+			if (left.CompareTo(right) > 0)
+			{
+				return left;
+			}
+			else
+			{
+				return right;
+			}
+		}
+
+		static void Func3() { Console.Write("3전"); throw new Exception("스택풀기"); Console.Write("3후"); }
+		static void Func2() { Console.Write("2전"); Func3(); Console.Write("2후"); }
+		static void Func1() { Console.Write("1전"); Func2(); Console.Write("1후"); }
+
+
+		// 구조체, 클래스 /////////////////////////////////////////////////////////////////////
+
+
+
+		enum Direction
+		{
+			Up, Down, Left, Right
+		}
+
+		enum Season
+		{
+			Spring, // 0
+			Summer, // 1
+			Autumn = 20, // 20
+			Winter // 21
+		}
+
+		struct StudentInfo
+		{
+			public string name;
+			public int math;
+			public int english;
+			public int science;
+
+			public float Average()
+			{
+				return (math + english + science) / 3f;
+			}
+		}
+
+		struct Point
+		{
+			public int x;
+			public int y;
+
+			public Point(int x, int y)
+			{
+				// 초기화에서 모든 구조체 변수를 초기화라지 않으면 에러가 발생한다.
+				this.x = x;
+				this.y = y;
+				// this는 자기 자신을 가르킨다.
+			}
+		}
+
+		enum Jop
+		{
+			Archor,
+			Mage,
+			Knight
+		}
+
+		struct PlayerStat
+		{
+			public int hp;
+			public int mp;
+			public int ad;
+			public float speed;
+
+			public PlayerStat(Jop jop)
+			{
+				if (jop == Jop.Archor)
+				{
+					hp = 100;
+				}
+			}
+		}
+
+		struct MyStruct
+		{
+			public int value1;
+			public int value2;
+		}
+
+		class Student
+		{
+			public string name;
+			public int math;
+			public int english;
+			public int science;
+
+			public float GetAverage()
+			{
+				return (math + english + science) / 3f;
+			}
+		}
+
+		class Car
+		{
+			public string name;
+			public string color;
+
+			public Car(string name, string color)
+			{
+				this.name = name;
+				this.color = color;
+			}
+		}
+
+		class MyClass
+		{
+			public int value1;
+			public int value2;
+		}
+
+		struct Player
+		{
+			public int hp;
+		}
+
+		struct Monster
+		{
+			public int damage;
+
+			public void Attack(Player player)
+			{
+				player.hp -= damage;
+			}
+		}
+
+		class PlayerClass
+		{
+			public int hp;
+		}
+
+		class MonsterClass
+		{
+			public int damage;
+
+			public void Attack(PlayerClass playerClass)
+			{
+				playerClass.hp -= damage;
+			}
+		}
+
+		struct ValueType
+		{
+			public int value;
+		}
+
+		class RefType
+		{
+			public int value;
+		}
+
+		class Student1
+		{
+			private static int count;
+
+			private int id;
+
+			public Student1()
+			{
+				id = ++count;
+			}
+
+			public static int GetCount()
+			{
+				return count;
+			}
+
+			public int GetID()
+			{
+				return id;
+			}
+		}
+
+		static class Setting
+		{
+			public static int volume;
+
+			public static void Reset()
+			{
+				volume = 10;
+			}
+
+			// 정적 클래스에서는 정적이 변수, 함수가 아니면 포함이 불가능하다.
+		}
+
+		class Driver
+		{
+			public string name;
+
+			public void Ride(Vehicle Vehicle)
+			{
+				Console.WriteLine($"{name}이 {Vehicle.name}을 운전합니다.");
+			}
+		}
+
+		class Vehicle
+		{
+			public string name;
+			public int speed = 0;
+
+			public void Move()
+			{
+				speed += 10;
+				Console.WriteLine($"{name}의 속도가 {speed}으로 증가합니다.");
+			}
+		}
+
+		class Capsule
+		{
+			private int veriable; // 멤버변수 정보를 표현
+			private void Function() // 멤버함수 기능을 표현
+			{
+
+			}
+		}
+
+		class AccessSpecifier
+		{
+			public int publicValue;
+			private int privateValue;
+
+			void Function()
+			{
+				publicValue = 1;
+				privateValue = 2; // 같은 클래스이면 접근이 가능하다.
+			}
+		}
+
+		class Bank
+		{
+			int balance;
+
+			public void Save(int money)
+			{
+				balance += money;
+			}
+
+			public void Load(int money)
+			{
+				balance -= money;
+			}
+		}
+
+		class VeryComplicatedObject
+		{
+			int veryComplicatedValue1; // 캡슐화된 클래스의 private는 외부에서 접근불가하므로 사용할 수 없다.
+
+			void VeryComplicatedFunction1()
+			{
+
+			}
+
+			// 캡슐화된 클래스의 public은 외부에서 접가능하므로 사용을 권장하는 기능이다.
+			public void UseThisFunction()
+			{
+
+			}
+
+			// 남의 코드를 사용할 떄 private는 무시해도 될 정도이다 public으로 풀어준 것만 보고 사용하면 된다.
+		}
+
+		class IntArray
+		{
+			int[] array = new int[10];
+
+			public void Setvalue(int index, int value)
+			{
+				if (index < 0 || index >= 10)
+				{
+					return;
+				}
+
+				array[index] = value;
+			}
+		}
+
+		class Monster1
+		{
+			protected string name;
+			protected int hp;
+
+			public void Move()
+			{
+				Console.WriteLine($"{name}이 움직입니다.");
+			}
+
+			public void TakeHit(int damage)
+			{
+				hp -= damage;
+				Console.WriteLine($"{name}이{damage}를 받아 체력이{hp}이 되었습니다.");
+			}
+		}
+
+		class Dragon : Monster1
+		{
+			public int damage;
+
+			public Dragon()
+			{
+				name = "드래곤";
 				hp = 100;
 			}
-		}
-	}
 
-	struct MyStruct
-	{
-		public int value1;
-		public int value2;
-	}
-
-	class Student
-	{
-		public string name;
-		public int math;
-		public int english;
-		public int science;
-
-		public float GetAverage()
-		{
-			return (math + english + science) / 3f;
-		}
-	}
-
-	class Car
-	{
-		public string name;
-		public string color;
-
-		public Car(string name, string color)
-		{
-			this.name = name;
-			this.color = color;
-		}
-	}
-
-	class MyClass
-	{
-		public int value1;
-		public int value2;
-	}
-
-	struct Player
-	{
-		public int hp;
-	}
-
-	struct Monster
-	{
-		public int damage;
-
-		public void Attack(Player player)
-		{
-			player.hp -= damage;
-		}
-	}
-
-	class PlayerClass
-	{
-		public int hp;
-	}
-
-	class MonsterClass
-	{
-		public int damage;
-
-		public void Attack(PlayerClass playerClass)
-		{
-			playerClass.hp -= damage;
-		}
-	}
-
-	struct ValueType
-	{
-		public int value;
-	}
-
-	class RefType
-	{
-		public int value;
-	}
-
-	class Student1
-	{
-		private static int count;
-
-		private int id;
-
-		public Student1()
-		{
-			id = ++count;
-		}
-
-		public static int GetCount()
-		{
-			return count;
-		}
-
-		public int GetID()
-		{
-			return id;
-		}
-	}
-
-	static class Setting
-	{
-		public static int volume;
-
-		public static void Reset()
-		{
-			volume = 10;
-		}
-
-		// 정적 클래스에서는 정적이 변수, 함수가 아니면 포함이 불가능하다.
-	}
-
-	class Driver
-	{
-		public string name;
-
-		public void Ride(Vehicle Vehicle)
-		{
-			Console.WriteLine($"{name}이 {Vehicle.name}을 운전합니다.");
-		}
-	}
-
-	class Vehicle
-	{
-		public string name;
-		public int speed = 0;
-
-		public void Move()
-		{
-			speed += 10;
-			Console.WriteLine($"{name}의 속도가 {speed}으로 증가합니다.");
-		}
-	}
-
-	class Capsule
-	{
-		private int veriable; // 멤버변수 정보를 표현
-		private void Function() // 멤버함수 기능을 표현
-		{
-
-		}
-	}
-
-	class AccessSpecifier
-	{
-		public int publicValue;
-		private int privateValue;
-
-		void Function()
-		{
-			publicValue = 1;
-			privateValue = 2; // 같은 클래스이면 접근이 가능하다.
-		}
-	}
-
-	class Bank
-	{
-		int balance;
-
-		public void Save(int money)
-		{
-			balance += money;
-		}
-
-		public void Load(int money)
-		{
-			balance -= money;
-		}
-	}
-
-	class VeryComplicatedObject
-	{
-		int veryComplicatedValue1; // 캡슐화된 클래스의 private는 외부에서 접근불가하므로 사용할 수 없다.
-
-		void VeryComplicatedFunction1() 
-		{
-
-		}
-		
-		// 캡슐화된 클래스의 public은 외부에서 접가능하므로 사용을 권장하는 기능이다.
-		public void UseThisFunction()
-		{
-
-		}
-
-		// 남의 코드를 사용할 떄 private는 무시해도 될 정도이다 public으로 풀어준 것만 보고 사용하면 된다.
-	}
-
-	class IntArray
-	{
-		int[] array = new int[10];
-
-		public void Setvalue(int index, int value)
-		{
-			if (index < 0 || index >= 10)
+			public void Breath()
 			{
-				return;
+				Console.WriteLine($"{name}이 브레스를 뿜습니다.");
+			}
+		}
+
+		class DragonRed : Dragon
+		{
+			public DragonRed()
+			{
+				damage = 100;
+				name = "드래곤레드";
+			}
+		}
+
+		// 이렇게 사용하면 드래곤, 몬스터를 둘 다 상속을 받은거라 전부 사용이 가능하게 된다. 상속에 상속인 느낌
+
+		class Slime : Monster1
+		{
+			public Slime()
+			{
+				name = "슬라임";
+				hp = 5;
 			}
 
-			array[index] = value;
+			public void Split()
+			{
+				Console.WriteLine($"{name} 이/가 분열합니다.");
+			}
 		}
+
+		class Hero
+		{
+			int damage = 3;
+
+			public void Attack(Monster1 monster)
+			{
+				monster.TakeHit(damage);
+			}
+
+			// 만약에 몬스터라는 상속 구조를 하지 않았다면 드래곤 떄리기, 슬라임 때리기를 전부 구현했어야한다!!
+
+			public void Attack2(Dragon dragon)
+			{
+				// 위에처럼 안했으면 이런식으로 모든 몬스터를 넣었어야 한다.
+			}
+		}
+		class Parent
+		{
+			public void Func() { }
+		}
+		class Child1 : Parent { }
+		class Child2 : Parent { }
+		class Child3 : Parent { }
+
+		abstract class Item // 하나 이상의 추상함수를 포함하는 클래스이다.
+		{
+			public abstract void Use(); // 추상 클래스에서 구현을 진행하지 않고 선언만 진행한다.
+		}
+
+		class Potion : Item
+		{
+			public override void Use()
+			{
+				Console.WriteLine("포션을 사용하여 체력을 회복합니다.");
+			}
+		}
+
+		class Herb : Item
+		{
+			public override void Use()
+			{
+				Console.WriteLine("해독초를 사용하여 독을 해제합니다.");
+			}
+		}
+
+		abstract class Animal
+		{
+			public abstract void Cry(); // 상위 클래스에서 구현하기 어려운 기능 동물이 어떻게 우는지 알지 못함.
+		}
+
+		class Cat : Animal
+		{
+			public override void Cry()
+			{
+				Console.WriteLine("야옹"); // 자식 클래스에서 구체화한다. 고양이가 어떻게 우는지 알기 때문에 사용할 수 있는 느낌
+			}
+		}
+
+		class Dog : Animal
+		{
+			public override void Cry()
+			{
+				Console.WriteLine("멍멍");
+			}
+		}
+
+		// 추상화 사용의밎 2
+		// 상위 클래스의 인터페이스를 구현하기 위한 수단으로 사용한다.
+		// 추상적인 기능을 구체화시키지 않은 경우 인스턴스 생성이 불가능하다.
+		// 이를 통해 자식클래스에게 순수가상함수의 구현을 강제하여 실수를 줄인다.
+
+		class Bire : Animal
+		{
+			public override void Cry()
+			{
+				// 추상화는 추상클래스를 상속 받으면 override를 하지 않으면 오류이다.
+			}
+		}
+
+		class Car1
+		{
+			protected string name;
+			protected int speed;
+
+			public void Move()
+			{
+				Console.WriteLine($"{name},이 {speed}의 속도로 이동합니다.");
+			}
+		}
+
+		class Truck : Car1
+		{
+			public Truck()
+			{
+				name = "트럭";
+				speed = 30;
+			}
+		}
+
+		class SprotCar : Car1
+		{
+			public SprotCar()
+			{
+				name = "스포츠카";
+				speed = 100;
+			}
+		}
+
+		class Skill
+		{
+			public virtual void Execute()
+			{
+				Console.WriteLine("스킬 재상용 대기시간을 진행시킨다.");
+			}
+		}
+
+		class FireBall : Skill
+		{
+			public override void Execute()
+			{
+				base.Execute();
+				Console.WriteLine("전방에 화염구를 날린다.");
+			}
+		}
+
+		class Dash : Skill
+		{
+			public override void Execute()
+			{
+				Console.WriteLine("전방에 근거리를 빠르게 이동");
+			}
+		}
+
+		class Player1
+		{
+			Skill skill;
+
+			public void SetSkill(Skill skill)
+			{
+				this.skill = skill;
+			}
+
+			public void UseSkill()
+			{
+				skill.Execute(); // skill 클래스의 다형성을 확보한 결과 진행
+			}
+		}
+
+		// 다형성 사용의미2
+		// 클래스간의 의존성을 줄여 확장성은 높임
+		class SkillContents : Skill
+		{
+			public override void Execute()
+			{
+				base.Execute();
+				// 프로그램의 확장을 위해 상위 클래스를 상속하는 클래스를 개발
+			}
+		}
+
+		public interface IEnterable
+		{
+			void Enter();
+		}
+
+		public interface IOpenable
+		{
+			void Open();
+		}
+
+		public class Door : IEnterable, IOpenable
+		{
+			public void Enter()
+			{
+				Console.WriteLine("문에 들어갑니다.");
+			}
+
+			public void Open()
+			{
+				Console.WriteLine("문을 엽니다.");
+			}
+		}
+
+		public class Town : IEnterable
+		{
+			public void Enter()
+			{
+				Console.WriteLine("마을에 들어갑니다.");
+			}
+		}
+
+		public class Box : IOpenable
+		{
+			public void Open()
+			{
+				Console.WriteLine("상자를 엽니다.");
+			}
+		}
+
+		public class Player2
+		{
+			public void Enter(IEnterable enterable)
+			{
+				Console.WriteLine("플레이어가 대상에 들어가기 시도합니다.");
+				enterable.Enter();
+			}
+
+			public void Open(IOpenable openable)
+			{
+				Console.WriteLine("플레이어가 대상을 열기 시도합니다.");
+				openable.Open();
+			}
+
+			public void Attack(IDamageble damageble)
+			{
+				Console.WriteLine("플레이어가 대상을 공격하기 시도합니다.");
+				damageble.TakeHit(10);
+			}
+		}
+
+		public interface IDamageble
+		{
+			public void TakeHit(int damage);
+		}
+
+		public class Monster2 : IDamageble
+		{
+			public int hp;
+			public void TakeHit(int damage)
+			{
+				hp -= damage;
+				Console.WriteLine("몬스터가 데미지를 받습니다.");
+			}
+		}
+
+		public interface IEnterable1
+		{
+			void Enter();
+		}
+
+		public abstract class Building : IEnterable1
+		{
+			public void Enter()
+			{
+				Console.WriteLine("건물에 들어갑니다.");
+			}
+		}
+
+		public class Bank1 : Building
+		{
+			// 은행은 건물이다. 상속관계가 적합하다.
+		}
+
+		public class Car2 : IEnterable1
+		{
+			public void Enter()
+			{
+				Console.WriteLine("차 문을 열고 들어갑니다.");
+			}
+		}
+
+		public class SafeArray<T>
+		{
+			T[] array;
+
+			public SafeArray(int size)
+			{
+				array = new T[size];
+			}
+
+			public void Set(int index, T value)
+			{
+				if (index < 0 || index >= array.Length)
+				{
+					return;
+				}
+
+				array[index] = value;
+			}
+
+			public T Get(int index)
+			{
+				if (index < 0 || index >= array.Length)
+				{
+					return default(T); // 이건 T 자료형의 기본값이다.
+				}
+
+				return array[index];
+			}
+		}
+
+		// 일반화 자료형 제약
+		// 일반화 자료형을 선언할 때 제약조건을 선언하여, 사용 당시 쓸 수 있는 자료형을 제한한다.
+		class StructT<T> where T : struct { }     // T구조체만 사용가능하다.
+		class ClassT<T> where T : class { } // T클래스만 사용가능하다.
+		class NewT<T> where T : new() { }   // T는 매개변수 없는 생성자가 있는 자료형만 사용이 가능하다.
+
+		class ParentT<T> where T : Parent1 { } // T는 Parent 파생클래스만 사용 가능하다.
+		class InterfaceT<T> where T : IComparable { } // T는 인터페이스를 포함한 자료형만 가능하다.
+
+		class Parent1 { }
+		class Child : Parent1 { }
 	}
-
-	class Monster1
-	{
-		protected string name;
-		protected int hp;
-
-		public void Move()
-		{
-			Console.WriteLine($"{name}이 움직입니다.");
-		}
-
-		public void TakeHit(int damage)
-		{
-			hp -= damage;
-			Console.WriteLine($"{name}이{damage}를 받아 체력이{hp}이 되었습니다.");
-		}
-	}
-
-	class Dragon : Monster1
-	{
-		public int damage;
-
-		public Dragon()
-		{
-			name = "드래곤";
-			hp = 100;
-		}
-
-		public void Breath()
-		{
-			Console.WriteLine($"{name}이 브레스를 뿜습니다.");
-		}
-	}
-
-	class DragonRed : Dragon
-	{
-		public DragonRed()
-		{
-			damage = 100;
-			name = "드래곤레드";
-		}
-	}
-
-	// 이렇게 사용하면 드래곤, 몬스터를 둘 다 상속을 받은거라 전부 사용이 가능하게 된다. 상속에 상속인 느낌
-
-	class Slime : Monster1
-	{
-		public Slime()
-		{
-			name = "슬라임";
-			hp = 5;
-		}
-
-		public void Split()
-		{
-			Console.WriteLine($"{name} 이/가 분열합니다.");
-		}
-	}
-
-	class Hero
-	{
-		int damage = 3;
-		
-		public void Attack(Monster1 monster)
-		{
-			monster.TakeHit(damage);
-		}
-
-		// 만약에 몬스터라는 상속 구조를 하지 않았다면 드래곤 떄리기, 슬라임 때리기를 전부 구현했어야한다!!
-
-		public void Attack2(Dragon dragon)
-		{
-			// 위에처럼 안했으면 이런식으로 모든 몬스터를 넣었어야 한다.
-		}
-	}
-	class Parent
-	{
-		public void Func() { }
-	}
-	class Child1 : Parent { }
-	class Child2 : Parent { }
-	class Child3 : Parent { }
-
 }
