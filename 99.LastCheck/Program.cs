@@ -367,18 +367,18 @@ namespace _99.LastCheck
 			} while (input2 < 1 || 9 < input2);
 
 			// for 반복문 초기화 , 조건식, 증감연산으로 구성된 반복문을 말한다.
-			for (int i = 0; i < 5; i++)
+			for (int i2 = 0; i2 < 5; i2++)
 			{
-				Console.WriteLine(i);
+				Console.WriteLine(i2);
 			}
 			// 몇 번 반복을 하겠다에 사용을 한다.
 
 			// foreach 반복문 반복 가능한 데이터집합의 처음부터 끝가지 반복한다.
 
 			int[] intArray = { 1, 3, 7, 9, 8, 6, 4, 2, 0 };
-			foreach (int i in intArray)
+			foreach (int i1 in intArray)
 			{
-				Console.WriteLine(i);
+				Console.WriteLine(i1);
 			}
 			// 하나씩 전부 꺼내어 준다.
 
@@ -386,11 +386,11 @@ namespace _99.LastCheck
 			// break 제어문 가장 가까운 반복문을 종료한다.
 
 			int num = 35;
-			for (int i = 2; i < num; i++)
+			for (int i3 = 2; i3 < num; i3++)
 			{
 				if (num % 1 == 0)
 				{
-					Console.WriteLine(i);
+					Console.WriteLine(i3);
 					break;
 				}
 			}
@@ -398,17 +398,17 @@ namespace _99.LastCheck
 			// 찾았으니 그만 찾아 라는 방법이다.
 
 			// continue 제어문 가장 가까운 반복문의 새 반복을 시작한다.
-			for (int i = 0; i < 10; i++)
+			for (int i4 = 0; i4 < 10; i4++)
 			{
-				if (i % 2 == 0)
+				if (i4 % 2 == 0)
 				{
 					continue;
 				}
-				if (i % 3 == 0)
+				if (i4 % 3 == 0)
 				{
 					continue;
 				}
-				Console.WriteLine(i);
+				Console.WriteLine(i4);
 			}
 			// break는 찾았으니 해당 반복을 종료하고 continue는 현재 i는 무시하고 계속 반복해 라는 것이다.
 
@@ -1056,9 +1056,9 @@ namespace _99.LastCheck
 			// 배열과 반복
 			// 배열의 인덱스를 반복하여 증가시키며 상용하는 경우 배열의 모든 요소를 반복 수행하는데 용이하다.
 			int[] ints = { 1, 2, 3, 4, 5 };
-			for (int i = 0; i < array.Length; i++)
+			for (int i5 = 0; i5 < array.Length; i5++)
 			{
-				Console.WriteLine(ints[i]);
+				Console.WriteLine(ints[i5]);
 			}
 
 			int[,] tile = { { 1, 2, 3 }, { 4, 5, 6 } };
@@ -1157,11 +1157,11 @@ namespace _99.LastCheck
 			// 일정 버퍼를 사용하는 방식으로 가비지 컬렉터에 부담되지 않도록 설계된다.
 
 			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < 10; i++)
+			for (int i6 = 0; i6 < 10; i6++)
 			{
 				sb.Append((char)65 + 1);
 				sb.Append(":");
-				sb.Append(65 + i);
+				sb.Append(65 + i6);
 				sb.AppendLine();
 			}
 
@@ -1217,7 +1217,7 @@ namespace _99.LastCheck
 			// 만약에 value2가 0인 경우 예외처리를 진행하지 않으면 프로그램이 중단된다.
 			// 아래의 조건문을 통해 프로그램이 중단되는 상화에 대한 예외처리를 진행해야한다.
 
-			if(value2 != 0)
+			if (value2 != 0)
 			{
 				float result1 = value1 / value2;
 				Console.WriteLine(result1);
@@ -1240,10 +1240,10 @@ namespace _99.LastCheck
 				Console.WriteLine();
 				string input1 = "10";
 
-				int value5 = int.Parse(input1);
-				int[] array6 = new int[value5];
+				int value55 = int.Parse(input1);
+				int[] array66 = new int[value55];
 
-				array6[10] = 10;
+				array66[10] = 10;
 			}
 
 			catch (FormatException ex)
@@ -1276,7 +1276,7 @@ namespace _99.LastCheck
 				int[] array7 = { 1, 3, 5, 7, 9 };
 				int index1 = Array.IndexOf(array, 0);
 
-				if(index < 0)
+				if (index < 0)
 				{
 					throw new InvalidOperationException();
 				}
@@ -1293,10 +1293,367 @@ namespace _99.LastCheck
 			{
 				Func1();
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
 			}
+
+			// 데리게이트 대리자
+			// 특정 매개 변수 목록 및 반환 형식이 있는 함수에 대한 참조이다.
+			// 대리자 인스턴스를 통해 함수를 호출 할 수 있다.
+
+			// 델리게이트 정의
+			// delegate 반환형 델리게이트 이름(매개변수이름)
+
+			// 델리게이트 사용
+			// 반환형과 매개변수가 일치하는 함수를 델리게이트 변수에 할당한다.
+			// 델리게이트 변수에 참조한 함수를 대리자를 통해 호출 가능하다.
+
+			DelegateMethod1 delegate1 = new DelegateMethod1(Plus1); // 델리게이트 인스턴스 생성
+			DelegateMethod2 delegate2 = Message1; // 간략한 문법의 델리게이트 인스턴스 생송
+
+			delegate1.Invoke(20, 10); // delegate1에 들어있는 Plus를 Invoke를 통해 참조되어 있는 함수를 호출한다.
+			delegate2("메시지"); // 간략한 문법의 델리게이트 함수 호출이 가능하다.
+
+			delegate1 = Plus1;
+			Console.WriteLine(delegate1(20, 10));
+			delegate1 = Minus1;
+			Console.WriteLine(delegate1(20, 10));
+			delegate1 = Multi1;
+			Console.WriteLine(delegate1(20, 10));
+			delegate1 = Divide1;
+			Console.WriteLine(delegate1(20, 10));
+
+			// delegate2에 Plus는 넣지 못한다. 반환형과 매개변수가 일치하지 않은 함수는 참조가 불가능하다. 
+
+			// 콜백함수 델리게이트를 이용하여 특정조건에서 반응하는 함수를 구현한다.
+			// 함수의 호출이 아닌 역으로 호출 받을 때 반응을 참조하여 역호출하는 것
+
+			// UI에서 제일 많이 사용하게 될 것이다.
+
+			File file = new File();
+
+			Button saveButton = new Button();
+			saveButton.callback = file.Save;
+
+			Button loadButton = new Button();
+			loadButton.callback = file.Load;
+
+			saveButton.Click();
+			loadButton.Click();
+
+			// 델리게이트 체인
+			// 델리게이트 변수에 여러개의 함수를 참조하는 방법이다.
+			// 델리게이트 체인 하나의 델리게이트 변수에 여러개의 함수를 할당하는 것이 가능하다.
+			// += -= 연산자를 통해 할당을 추가하고 제거할 수 있다.
+			// = 연산자를 통해 할당할 경우 이전의 다른 함수들을 할당한 상황이 사라진다.
+
+			Action action;
+			action = Func22;
+			action += Func11;
+			action += Func33;
+			action(); // 22 11 33이 호출된다.
+
+			action -= Func11;
+			if (action != null)
+			{
+				action();
+			}
+			action += Func22;
+			action += Func22;
+			action();
+
+			action -= Func11;
+
+			action = Func11;
+			action();
+
+			// 22 처럼 중복이 있으면 추가한 만큼 실행한다. 순서대로 나옴.
+
+			// 일반화 델리게이트 
+			// 개발과정에서 많이 사용되는 델리게이트 경우 일반화된 델리게이트를 사용한다.
+
+			// Func 델리게이트
+			// 반환형과 매개변수를 지정한 델리게이트 
+
+			Func<int, int, int> func;
+			func = Plus00;
+			func = Minus00;
+
+			// Action 델리게이트
+			// 반환형이 void 이며 매개변수를 지정한 델리게이트
+			// Action<매개변수1, 매개변수2, ...>
+
+			Action<string> action1;
+			action1 = Message;
+
+			// Predicate 델리게이트
+			// 반환형이 bool, 매개변수가 하나인 델리게이트
+
+			Predicate<string> predicate;
+			predicate = IsSentence;
+
+			// 지정자 델리게이트를 사용하여 미완성 상태의 함수를 구성
+			// 매개변수로 전달한 지정자를 기준으로 함수를 완성하여 동작시킨다.
+			// 기준을 정해주는 것으로 다양한 결과가 나올 수 있는 함수를 구성 가능하다.
+
+			// 델리게이트를 지정자로 사용
+			// 매개변수로 함수에 필요한 기준을 전달
+			// 전달한 기준을 통해 결과를 도출한다.
+
+			int[] array00 = { 3, -2, 1, -4, 9, -8, 7, -6, 5 };
+
+			int index11 = CountIf(array00, IsPositive); // 배열 중 값이 양수인 데이터 갯수
+			int index22 = CountIf(array00, IsNagative); // 배열 중 값이 음수인 데이터 갯수
+			int index33 = CountIf(array00, value => value > 3); // 배열중 값이 5보다 큰 데이터 갯수
+			Console.WriteLine(index11);
+			Console.WriteLine(index22);
+			Console.WriteLine(index33);
+
+			// 무명메서드와 람다식
+			// 델리게이트 변수에 할당하기 위한 함수를 소크도르 구문에서 생성하여 전달
+			// 전달하기 위한 함수가 간단하고 일회성으로 사용될 경우에 간단하게 작성할 수 있다.
+
+			Func<string, int> func2;
+
+			// 함수를 통한 할당
+			// 클래스에 정의된 함수를 직접 할당
+			// 클래스의 멤버함수로 연결하기 위한 기능이 있을 경우 적합하다.
+
+			func2 = CharCount;
+
+			// 무명메서드 함수를 통한 연결은 함수가 직접적으로 선언되어 있어야 사용이 가능하다.
+			// 할당하기 위한 함수가 간단하고 자중 사용될수록 비효율적이다.
+			// 간단한 표현식을 통해 함수를 즉시 작성하여 전달하는 방법이다.
+
+			func2 = delegate (string str)
+			{
+				return str.Length;
+			};
+
+			func2 = (str) => { return str.Length; };
+			func2 = str => str.Length;
+
+			// 이벤트 일련의 시건이 발생했다는 사실을 다른 객체에게 전달한다.
+			// 델리게이트의 일부 기능을 제한하여 이벤트의 용도로 사용
+
+			// 이벤트 선언
+			// 델리게이트 변수 앞에 event 키워드를 추가하여 이벤트로 선언
+
+			Player00 player00 = new Player00();
+			UI ui = new UI();
+			SFX sfx = new SFX();
+			VFX vfx = new VFX();
+
+			player00.OnGetCoin += ui.UpdateUI;
+			player00.OnGetCoin += sfx.CoinSound;
+
+			// 일련의 사건이 발생했을 때 이벤트를 통한 반응
+
+			player00.GetCoin();
+			// 플레이어가 코인을 얻음
+			// UI에 코인수를 갱신
+			// 코인을 얻는 효과음 재생
+			// 코인을 얻는 반짝거리는 효과
+
+			// 이벤트 방식으로 코드 수정없이 이벤트시 반응할 객체를 추가 기능
+			player00.OnGetCoin += vfx.CoinEffect;
+
+			player00.GetCoin();
+			// 플레이어가 코인을 얻음
+			// UI에 코인수를 갱신
+			// 코인을 얻는 효과음 재생
+			// 코인을 얻는 반짝거리는 효과
+
+			// 이벤트 방식으로 코드 수정없이 이벤트시 반응할 객체를 제거 기능
+
+			player00.OnGetCoin -= sfx.CoinSound;
+
+			player00.GetCoin();
+			// 플레이어가 코인을 얻음
+			// UI에 코인수를 갱신
+			// 코인을 얻는 반짝거리는 효과
+
+			// 델리게이트 체인과 이벤트의 차이점
+			// 델리게이트 또한 체인을 통하여 이벤트로서 구현이 가능하다.
+			// 하지만 델리게이트는 두가지 사항 때문에 이벤트로서 사용하기 적합하지 않다.
+			// 1. = 대입연산을 통해 기존의 이벤트에 반응할 객체 상황이 초기화 될 수 있음
+			// 2. 클래스 외부에서 이벤트를 발생시켜 원하지 않는 상황에서 이벤트 발생 가능하다.
+			// event 키워드를 추가할 경우 데이트에서 위 두가지 기능을 제한하여 이벤트 전용으로 사용을 유도할 수 있다.
+			// event 변수는 델리게이트에서 기능을 제한하여 이벤트 전용의 기능만으로 사용하는 기능이다.
+
+			EventSender sender = new EventSender();
+			EventListener listener1 = new EventListener();
+			EventListener listener2 = new EventListener();
+			EventListener listener3 = new EventListener();
+
+			// 제한 사항 1. 이벤트 변수는 = 대입 연산 불가
+
+			// 델리게이트는 대입연산이 가능하며, 이벤트에 반응할 객체들의 상황을 잃을 문제점이 있다.
+			sender.OnDelegate += listener1.ReAction;
+			sender.OnDelegate += listener2.ReAction;
+			sender.OnDelegate = listener3.ReAction;
+
+			// 주의 기존의 이벤트에 반응할 객체들이 초기화된다.
+
+			// 이벤트는 대입연산이 불가하여 이벤트에 반응할 객체들의 상황을 온전히 유지 가능하다.
+			sender.OnEvent += listener1.ReAction;
+			sender.OnEvent += listener2.ReAction;
+			// 이벤트에 = 는 불가능하다.
+
+			// 제한사항 2. 이벤트 변수는 클래스 외부에서 호출이 불가능하다.
+			// 델리게이트는 외부에서 호출이 가능하며 객체가 일련의 사건이 발생하지 않아도 이벤트 발생이 될 수 있다.
+			// 이벤트는 외부에서 호출이 불가능하며 객체가 일련의 사건이 발생한 경우에서만 내부에서 이벤트 발생
+
+			// 이벤트의 사용의미
+			// 이벤트를 사용할 경우 클래스의 개방폐쇄원칙을 지킬 수 있으며
+			// 일련의 사건이 발생한 타이밍에만 연산을 진행할 수 있다.
+
+			// c# 에서 많은 기능이 있으며 기능을 사용해주는 것이 베스트이다.
+			// c#에서 제공되는 기능들은 훨씬 최적화가 잘 되어 있는 경우가 많다.
+			// 없이 사용해서 문제는 없지만 사용하면 편하다.
+			// 프로퍼티는 꼭 알아둘 것
+
+			// 기본자료형의 함수
+			// 기본 자료형은 구조체 또는 클래스로 구성되어있다.
+			// 이 구조체와 클래스 안에 유용한 기능이 구현되어 있다.
+
+			string str6 = "abc def";
+			str.ToLower(); // 소문자 변환
+			str.ToUpper(); // 대문자 변환
+			str.Split(" "); // 문자열 나누기
+			str.Replace('a', 'z'); // 문자 교체
+
+			int[] array6 = { 1, 2, 3, 4, 5, };
+			array6.Max(); // 최대값
+			array6.Max(); // 최소값
+			array.Average(); // 평균값
+
+			// 기본자료형의 static 함수
+			// 기본자료형의 인스턴스 없이 사용가능한 함수들이 구현되어 있다.
+			int.Parse("12"); // int 형변환
+			int value5 = int.MaxValue; // int 최대값
+
+			string.Compare("abc", "add"); // 문지열 비교
+
+			int[] values = { 5, 2, 1, 4, 3 };
+			Array.Sort(values); // 배열 정렬
+			Array.Reverse(values); // 배열 반전
+
+			// 확정메서드
+			// 클래스의 원래 형식을 수정하지 않고도 기존 형식에 함수를 추가할 수 있음
+			// 상속을 통하여 만들지 않고도 추가적인 함수를 구현 가능
+			// 정적함수에 첫번째 매개변수를 this 키워드 후 확장하고자 하는 자료형을 작성
+
+			// 인덱스 정의
+			//this[]를 속성으로 정의하여 클래스의 인스턴스에 인덱스 방식으로 접근 허용
+
+			IndexerArray array8 = new IndexerArray();
+			{
+				// 인덱서를 통한 인덱스 접근
+				array8[5] = 20;
+				int i8 = array8[5];
+			}
+
+			Equipment equipment = new Equipment();
+
+			equipment[Parts.Head] = "낡은 헬멧";
+			equipment[Parts.Feet] = "가죽 장화";
+
+			Console.WriteLine(equipment[Parts.Feet]);
+
+
+			// 값형식의 자료형들은 null을 가질 수 없음
+			// 값형식에도 null를 할당할 수 이쓴 Nullable 타입을 지원
+			bool? b = null;
+
+			int? i = 20;
+			if(b != null)
+			{
+				Console.WriteLine(b); // b 값이 null
+			}
+			if(i.HasValue)
+			{
+				Console.WriteLine(i); // i 값이 있으므로 출력
+			}
+
+			// null 조건연산자
+			// ? 앞의 객체가 null인 경우 null을 반환
+			// ? 앞의 객체가 null이 아닌 경우 접근
+			NullClass instance1 = null;
+			Console.WriteLine(instance1?.value); // value에 null을 반환
+			instance1?.Func(); // Func()은 null 반환
+
+			instance1 = new NullClass();
+			Console.WriteLine(instance1?.value); // 5반환
+			instance1?.Func(); // 함수 호출
+
+			// null 병합연산자
+			// ?? 앞의 객체가 null인 경우 ?? 뒤의 객체 반환
+			// ?? 앞의 객체가 null이 아닌경우 앞의 객체 반환
+
+			int[] array9 = null;
+			int length1 = array9?.Length ?? 0;
+			// 배열이 null인 경우 0 반환 0이 아닌 경우 배열의 크기를 반환해준다.
+
+			// null 병합할당연산자
+			// ?? = 앞의 객체가 null인 경우 ??= 뒤의 객체를 할당
+			// ?? = 앞의 객체가 null이 아닌 경우 ??= 뒤의 객체를 할당하지 않음
+			NullClass nullClass = null;
+			nullClass ??= new NullClass();
+			// nullClass가 null이므로 새로운 인스턴스 할당
+			nullClass ??= new NullClass();
+			// nullClass가 null이 아니므로 새로운 인스턴스 할당이 되지 않음
+
+			// 연산자 재정의
+			// 사용자정의 차료형이나 클래스의 연산자를 재정의하여 여러 의미로 사용
+			// 연산자 재정의
+			// 기본연산자의 연산을 함수로 재정의하여 기능을 구현
+			// 기본연산자를 호환하지 않는 사용자정의 자료형에 기본연산자 사용을 구현함.
+
+			Point11 point11 = new Point11(3, 3) + new Point11(2, 5);
+			Console.WriteLine(point11);
+
+			// named parameter
+			// 함수의 매개변수 순서와 무관하게 이름을 통해 호출
+			Profile(phone: "010-1111-2222", id: 1, name: "홀길동");
+			Profile(name: "홍길동", phone: "010-1234-5555", id: 2);
+
+			// Optional Parameter
+			// 함수의 매개변수가 초기값을 갖고 있다면, 함수 호출시 생략하는 것을 허용하는 방법이다.
+
+			AddStudent("철수");
+			AddStudent("영흐;");
+			AddStudent("민준", "인천");
+			AddStudent("철수", age : 7);
+
+			// Params Parameter
+			// 매개변수의 객수가 정해지지 않은 경우, 매개변수의 갯수를 유동적으로 사용하는 방법이다.
+
+			Sum(1, 3, 5, 7, 9);
+			Sum(3, 5, 7);
+			Sum();
+
+			// in Parameter
+			// 매개변수를 입력전용으로 설정
+			// 함수의 처음부터 끝까지 동일한 값을 보장하게 됨
+
+			int result1 = Plus1(1, 3);
+			Console.WriteLine(result1);
+
+			// out Parameter
+			// 매개변수를 출력전용으로 설정
+			// 함수의 반환값 외에 추가적인 출력이 필요할 경우에 사용한다.
+
+			int quotient;
+			Divide(5, 3, out quotient, out int remainder);
+			Console.WriteLine($"{quotient}, {remainder}");
+
+			int left1 = 10;
+			int right1 = 20;
+			Swap(ref left1, ref right1);
+
+			Console.WriteLine($"{left1}, {right1}");
 		}
 
 
@@ -1396,7 +1753,7 @@ namespace _99.LastCheck
 			}
 		}
 
-		public T Bigger<T> (T left, T right) where T : IComparable<T>
+		public T Bigger<T>(T left, T right) where T : IComparable<T>
 		{
 			if (left.CompareTo(right) > 0)
 			{
@@ -1412,6 +1769,137 @@ namespace _99.LastCheck
 		static void Func2() { Console.Write("2전"); Func3(); Console.Write("2후"); }
 		static void Func1() { Console.Write("1전"); Func2(); Console.Write("1후"); }
 
+		public delegate float DelegateMethod1(float x, float y);
+		public delegate void DelegateMethod2(string str);
+
+		static public float Plus1(float left, float right)
+		{
+			return left + right;
+		}
+
+		static public float Minus1(float left, float right)
+		{
+			return left - right;
+		}
+
+		static public float Multi1(float left, float right)
+		{
+			return left * right;
+		}
+
+		static public float Divide1(float left, float right)
+		{
+			return left / right;
+		}
+
+		static public void Message1(string message)
+		{
+			Console.WriteLine(message);
+		}
+
+		static void Func11()
+		{
+			Console.WriteLine("Func11");
+		}
+
+		static void Func22()
+		{
+			Console.WriteLine("Func22");
+		}
+
+		static void Func33()
+		{
+			Console.WriteLine("Func33");
+		}
+
+		static int Plus00(int left, int right)
+		{
+			return left + right;
+		}
+
+		static int Minus00(int left, int right)
+		{
+			return left - right;
+		}
+
+		static void Message(string message)
+		{
+			Console.WriteLine(message);
+		}
+
+		static bool IsSentence(string str)
+		{
+			return str.Contains(' ');
+		}
+
+		static public int CountIf(int[] arrat, Predicate<int> predicate)
+		{
+			int count = 0;
+
+			for (int i = 0; i < arrat.Length; i++)
+			{
+				return count++;
+			}
+
+			return count;
+		}
+
+		static public bool IsPositive(int value)
+		{
+			return value > 0;
+		}
+
+		static public bool IsNagative(int value)
+		{
+			return value < 0;
+		}
+
+		static public int CharCount(string str)
+		{
+			return str.Length;
+		}
+
+		static void Profile(int id, string name, string phone)
+		{
+
+		}
+
+		static void AddStudent(string name, string home = "서울", int age = 8)
+		{
+			// 서울 8 처럼 조기값이 있다면 뒤에 부터 써야한다. name이 age 보다 뒤로 가면 안 된다는 말
+		}
+
+		static int Sum(params int[] values)
+		{
+			int sum = 0;
+			for(int i10 = 0; i10< values.Length; i10++)
+			{
+				sum += values[i10];
+			}
+
+			return sum;
+		}
+
+		static int Plus1(in int left, in int right)
+		{
+			return left + right;
+			// left에 직접 값을 넣을 수 없다. 입력전용임
+		}
+
+		static void Divide(int left, int right, out int quotient, out int remainder)
+		{
+			quotient = left / right;
+			remainder = left % right;
+
+			// 함수의 종료전까지 out 매개변수에 값이 할당 안 되는 경우 오류이다.
+		}
+
+		static void Swap(ref int left, ref int right)
+		{
+			int temp = left;
+			left = right;
+			right = temp;
+		}
 
 		// 구조체, 클래스 /////////////////////////////////////////////////////////////////////
 
@@ -2041,5 +2529,280 @@ namespace _99.LastCheck
 
 		class Parent1 { }
 		class Child : Parent1 { }
+
+		public class Button
+		{
+			public Action callback;
+
+			public void Click()
+			{
+				if (callback != null)
+				{
+					callback();
+				}
+			}
+		}
+
+		public class File
+		{
+			public void Save()
+			{
+				Console.WriteLine("저장하기");
+			}
+
+			public void Load()
+			{
+				Console.WriteLine("불러오기 합니다.");
+			}
+		}
+
+		public class Player00
+		{
+			public event Action OnGetCoin; // 이벤트
+
+			public void GetCoin()
+			{
+				Console.WriteLine("플레이어가 코인을 얻음");
+
+				if(OnGetCoin != null)
+				{
+					OnGetCoin(); // 일련의 사건이 발생했을 때 이벤트 발생
+				}
+			}
+		}
+
+		public class UI
+		{
+			public void UpdateUI()
+			{
+				Console.WriteLine("UI에 코인 수를 갱신");
+			}
+		}
+
+		public class SFX
+		{
+			public void CoinSound()
+			{
+				Console.WriteLine("코인을 얻는 효과음 재생");
+			}
+		}
+
+		public class VFX
+		{
+			public void CoinEffect()
+			{
+				Console.WriteLine("코인을 얻는 반짝거리는 효과");
+			}
+		}
+
+		public class EventSender
+		{
+			public Action OnDelegate;
+			public event Action OnEvent;
+
+			public void DelegateCall()
+			{
+				if(OnDelegate != null)
+				{
+					OnDelegate();
+				}
+			}
+
+			public void EventCall()
+			{
+				if(OnEvent != null)
+				{
+					OnEvent();
+				}
+			}
+		}
+
+		public class EventListener
+		{
+			public void ReAction()
+			{
+
+			}
+		}
+
+		public class Call
+		{
+			// call 방식
+			// 일련의 사건이 발생한 순간에 대상의 함수를 호출하여 진행한다.
+			// 장점 : 불필요한 연산 ㅇ벗이 일련의 사건이 발생한 티이밍에 처리 가능하다.
+			// 단점 : 추가 기능 개발시 클래스를 수정해야하는 개방폐쇄의 원칙을 위반한다.
+
+			public class Player
+			{
+				public int hp = 100;
+
+				public UI ui;
+
+				public void Hit(int damage)
+				{
+					hp -= damage;
+					Console.WriteLine(hp);
+					// 클래스에서 연관된 기능들을 직접 호출해야한다.
+					// 만약 새로운 기능이 추가되는 경우 계속해서 수정될 부분이다.
+					ui.SetHP(hp);
+				}
+			}
+
+			public class UI
+			{
+				public void SetHP(int hp)
+				{
+					Console.WriteLine(hp);
+				}
+			}
+		}
+
+		
+
+		public class Polling
+		{
+			// 대상에서 일련의 사건 발생을 확인하기 위해 계속해서 변경사항을 확인
+			// 장점 : 추가 기능 개발시에도 클래스를 수정하지 않아 개방폐쇄의 원칙을 준수한다.
+			// 단점 : 변경사항이 ㅇ벗는 경우에도 계속 확인해야하는 불필요한 연산이 발생
+
+			public class Player
+			{
+				public int hp = 100;
+
+				public void Hit(int damage)
+				{
+					hp -= damage;
+					Console.WriteLine(hp);
+				}
+			}
+
+			public class UI
+			{
+				public Player player;
+
+				// UI를 갱신하기 위해 주기적으로 실행해야한다.
+				// 갱신이 늦을 경우 UI에서 확인하는 내용이 설계 데이터와 다를 수 있음.
+
+				public void CheckHP()
+				{
+					Console.WriteLine(player.hp);
+				}
+
+				public void Update()
+				{
+					CheckHP();
+				}
+			}
+		}
+
+		public class Event
+		{
+			// 일련의 사건이 발생했을 때 반응할 대상을 참조하고 사건 발생시 호출하여 진행한다.
+			// 장점 : 개방폐쇄의 원칙이 지켜지며, 불필요한 연산을 필요로 하지 않느다.
+			// 단점 : 이벤트를 구성하기 위한 추가적인 소스를 작성해야한다.
+
+			public class Player
+			{
+				public int hp = 100;
+
+				public event Action<int> OnChangeHP;
+
+				public void Hit(int damage)
+				{
+					hp -= damage;
+					Console.WriteLine(hp);
+
+					// 사건 발생한 시점에 이벤트를 등록한 객체들의 함수를 호출한다.
+					// 이벤트롤 구성할 경우 새로운 기능이 추가되어도 수정할 필요가 없다.
+
+					if(OnChangeHP != null)
+					{
+						OnChangeHP(hp);
+					}
+				}
+			}
+
+			public class UI
+			{
+				// 이벤트 발생 시점에 호출당할 함수
+				// 이벤트 발생 시점에 반드시 호출 당하기 때문에 주기적인 샐행이 필요없다.
+				public void SetHP(int hp)
+				{
+					Console.WriteLine(hp);
+				}
+			}
+
+			public void Main1()
+			{
+				Player player = new Player();
+				UI ui = new UI();
+				player.OnChangeHP += ui.SetHP;
+
+				player.Hit(10);
+			}
+		}
+
+		public class IndexerArray
+		{
+			private int[] array = new int[10];
+
+			public int this[int index]
+			{
+				get
+				{
+					return array[index];
+				}
+				set
+				{
+					array[index] = value;
+				}
+			}
+		}
+
+		public enum Parts { Head, Body, Feet, Hand, Size}
+
+		public class Equipment
+		{
+			string[] parts = new string[(int)Parts.Size];
+
+			public string this[Parts type]
+			{
+				get
+				{
+					return parts[(int)type];
+				}
+				set
+				{
+					parts[(int)type] = value;
+				}
+			}
+		}
+
+		public class NullClass
+		{
+			public int value = 5;
+
+			public void Func()
+			{
+
+			}
+		}
+
+		public struct Point11
+		{
+			public int x;
+			public int y;
+
+			public Point11(int x, int y)
+			{
+				this.x = x;
+				this.y = y;
+			}
+
+			static public Point11 operator +(Point11 left, Point11 right)
+			{
+				return new Point11(left.x + right.x, left.y + right.y);
+			}
+		}
 	}
 }
