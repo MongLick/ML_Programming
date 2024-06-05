@@ -1219,8 +1219,8 @@ namespace _99.LastCheck
 
 			if (value2 != 0)
 			{
-				float result1 = value1 / value2;
-				Console.WriteLine(result1);
+				float result11 = value1 / value2;
+				Console.WriteLine(result11);
 			}
 			else
 			{
@@ -1568,11 +1568,11 @@ namespace _99.LastCheck
 			bool? b = null;
 
 			int? i = 20;
-			if(b != null)
+			if (b != null)
 			{
 				Console.WriteLine(b); // b 값이 null
 			}
-			if(i.HasValue)
+			if (i.HasValue)
 			{
 				Console.WriteLine(i); // i 값이 있으므로 출력
 			}
@@ -1625,7 +1625,7 @@ namespace _99.LastCheck
 			AddStudent("철수");
 			AddStudent("영흐;");
 			AddStudent("민준", "인천");
-			AddStudent("철수", age : 7);
+			AddStudent("철수", age: 7);
 
 			// Params Parameter
 			// 매개변수의 객수가 정해지지 않은 경우, 매개변수의 갯수를 유동적으로 사용하는 방법이다.
@@ -1654,6 +1654,41 @@ namespace _99.LastCheck
 			Swap(ref left1, ref right1);
 
 			Console.WriteLine($"{left1}, {right1}");
+
+			// Partial Type
+			// 클래스, 구조체, 인터페이스를 분할하여 구현하는 방법
+			// 대규모 프로젝트에서 작업하는 경우 분산하여 구현에 유용하다.
+
+			Player33 player3 = new Player33();
+
+			int playerHP = player3.GetHP();
+
+			int playerMP = player3.Mp;
+			player3.Mp = 20;
+
+			int playerAP = player3.AP;
+			player3.AP = 20;
+
+			int playerDP = player3.DP;
+
+			int playerSP = player3.SP;
+
+			Yield yield = new Yield();
+
+			foreach(int num1 in yield.GetNumber())
+			{
+				Console.WriteLine(num1);
+			}
+
+			foreach(int num2 in yield.Repeater(5))
+			{
+				Console.WriteLine(num2);
+			}
+
+			foreach(int num3 in yield.UntilPlus(new int[5] { 1, 3, 5, -1, 4}))
+			{
+				Console.WriteLine(num3);
+			}
 		}
 
 
@@ -1872,7 +1907,7 @@ namespace _99.LastCheck
 		static int Sum(params int[] values)
 		{
 			int sum = 0;
-			for(int i10 = 0; i10< values.Length; i10++)
+			for (int i10 = 0; i10 < values.Length; i10++)
 			{
 				sum += values[i10];
 			}
@@ -2564,7 +2599,7 @@ namespace _99.LastCheck
 			{
 				Console.WriteLine("플레이어가 코인을 얻음");
 
-				if(OnGetCoin != null)
+				if (OnGetCoin != null)
 				{
 					OnGetCoin(); // 일련의 사건이 발생했을 때 이벤트 발생
 				}
@@ -2602,7 +2637,7 @@ namespace _99.LastCheck
 
 			public void DelegateCall()
 			{
-				if(OnDelegate != null)
+				if (OnDelegate != null)
 				{
 					OnDelegate();
 				}
@@ -2610,7 +2645,7 @@ namespace _99.LastCheck
 
 			public void EventCall()
 			{
-				if(OnEvent != null)
+				if (OnEvent != null)
 				{
 					OnEvent();
 				}
@@ -2657,7 +2692,7 @@ namespace _99.LastCheck
 			}
 		}
 
-		
+
 
 		public class Polling
 		{
@@ -2715,7 +2750,7 @@ namespace _99.LastCheck
 					// 사건 발생한 시점에 이벤트를 등록한 객체들의 함수를 호출한다.
 					// 이벤트롤 구성할 경우 새로운 기능이 추가되어도 수정할 필요가 없다.
 
-					if(OnChangeHP != null)
+					if (OnChangeHP != null)
 					{
 						OnChangeHP(hp);
 					}
@@ -2759,7 +2794,7 @@ namespace _99.LastCheck
 			}
 		}
 
-		public enum Parts { Head, Body, Feet, Hand, Size}
+		public enum Parts { Head, Body, Feet, Hand, Size }
 
 		public class Equipment
 		{
@@ -2804,5 +2839,133 @@ namespace _99.LastCheck
 				return new Point11(left.x + right.x, left.y + right.y);
 			}
 		}
+
+		public partial class Player11
+		{
+			private int hp;
+			// 전투 담당자 Player1 소스
+			public void Attack()
+			{
+
+			}
+
+			public void Defense()
+			{
+
+			}
+		}
+
+		public partial class Player11
+		{
+			private int weight;
+
+			public void GetItem()
+			{
+
+			}
+
+			public void UseItem()
+			{
+
+			}
+		}
+
+		// Partial Type에서 Partial Method가 포함될 수 있음
+		// 선언부와 구현부를 분리하여 구현함으로서 구현부를 숨길 수 있다.
+
+		// 선언부 : 함수가 있다는 것만 표시
+		public partial class Monster11
+		{
+			public partial void Attack(); // 설명서 주석 달아서 무슨 기능이예요 하는 것
+		}
+
+		public partial class Monster11
+		{
+			public partial void Attack()
+			{
+				// 실제 기능이 있는 곳 다른 회사에 보낼 때 이 소소는 안 보여줄 수 있다.
+			}
+		}
+
+		public class Player33
+		{
+			private int hp;
+
+			// Getter Setter
+			// 멤버변수가 외부객체와 상호작용하는 경우 Get&Set 함수를 구현해 주는 것이 일반적이다
+			// 1. Get Set 함수의 접근제한자를 설정하여 외부에서 멤버변수의 접근을 캡슐화한다.
+			// 2. Get & Set 함수를 거쳐 멤버변수에 접근할 경우 호출스택에 함수가 추가되어 변경시점을 확인 가능하다
+
+			public int GetHP()
+			{
+				return hp;
+			}
+
+			private void SetHp(int hp)
+			{
+				this.hp = hp;
+			}
+
+			// 속성 property
+			// Get Set 함수의 선언을 간소화
+
+			private int mp;
+			public int Mp
+			{
+				get { return mp; } // Get 험수와 같은 역할
+				set { mp = value; } // Set 함수와 같은 역할 매개변수는 value
+			}
+
+			public int AP { get; set; } // AP 멤버변수를 선언과 동시에 Get Set 속성
+			public int DP { get; private set; } // 속성의 접근제한자를 통한 캡슐화
+			public int SP { get; } = 10; // 읽기전용 속성 상수처럼 사용
+			public int HP => GetHP(); // 읽기전용 속성 람다처럼 사용 가능
+
+			// 변수는 다 private로 하는 것이 맞다. get set으로 하기.
+			// public으로 하는건 상수 말고는 없다
+			// 상수는 값을 실제로 넣을 때 사용한다
+			// 2라는 값이 필요한데 무슨 2이인지 필요할 때 사용한다.
+		}
+
+		class Yield
+		{
+			// 반복기를 통해 데이터 집합을 하나씩 리턴할 때 사용한다.
+			// 1. 반환할 데이터의 양이 커서 한꺼번에 반화는 것보다 분할해서 반화는 것이 효율적인 경우
+			// 2. 함수가 무제한의 데이터를 리턴할 경우
+			// 3. 이전단계까지의 결과에서 다음까지만의 계산이 필요한 경우
+
+			public IEnumerable<int> GetNumber()
+			{
+				yield return 10;
+				yield return 20;
+				yield return 30;
+				yield return 40;
+				yield return 50;
+			}
+
+			public IEnumerable<int> Repeater(int count)
+			{
+				for(int i = 0; i < count; i++)
+				{
+					yield return i;
+				}
+			}
+
+			public IEnumerable<int> UntilPlus(IEnumerable<int>numbers)
+			{
+				foreach(int n in numbers)
+				{
+					if(n > 0)
+					{
+						yield return n;
+					}
+					else
+					{
+						yield break;
+					}
+				}
+			}
+		}
 	}
 }
+
